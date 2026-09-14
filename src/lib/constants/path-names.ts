@@ -23,6 +23,8 @@ export const pathNames = {
     exactlywhatihavebeenlookingfor:
       "Project | Exactly What I Have Been Looking For",
     theguyshetoldyouabout: "Project | The Guy She Told You About",
+    myyearonx: "Project | MyYearOnX",
+    farside: "Project | Farside",
   },
 };
 

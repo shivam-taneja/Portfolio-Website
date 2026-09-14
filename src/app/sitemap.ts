@@ -130,5 +130,17 @@ export default async function sitemaps(): Promise<MetadataRoute.Sitemap> {
       priority: 0.6,
       changeFrequency: "yearly",
     },
+    {
+      url: "https://www.shivamtaneja.com/projects/myyearonx",
+      lastModified: new Date(),
+      priority: 0.6,
+      changeFrequency: "yearly",
+    },
+    {
+      url: "https://www.shivamtaneja.com/projects/farside",
+      lastModified: new Date(),
+      priority: 0.6,
+      changeFrequency: "yearly",
+    },
   ];
 }

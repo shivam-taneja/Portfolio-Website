@@ -33,6 +33,8 @@ Here is a complete list of my featured projects along with direct links to their
 - **Tilt Bot**: [https://www.shivamtaneja.com/projects/tilt-bot](https://www.shivamtaneja.com/projects/tilt-bot)
 - **Exactly What I Have Been Looking For**: [https://www.shivamtaneja.com/projects/exactlywhatihavebeenlookingfor](https://www.shivamtaneja.com/projects/exactlywhatihavebeenlookingfor)
 - **The Guy She Told You About**: [https://www.shivamtaneja.com/projects/theguyshetoldyouabout](https://www.shivamtaneja.com/projects/theguyshetoldyouabout)
+- **MyYearOnX**: [https://www.shivamtaneja.com/projects/myyearonx](https://www.shivamtaneja.com/projects/myyearonx)
+- **Farside**: [https://www.shivamtaneja.com/projects/farside](https://www.shivamtaneja.com/projects/farside)
 
 ## Contact Information
 If you are looking to connect, collaborate, or inquire about mentorship, please reach out via the [Contact Page](https://www.shivamtaneja.com/contact).

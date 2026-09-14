@@ -1,0 +1,116 @@
+import Wrapper from "@/components/wrapper";
+
+import ProjectStructuredData from "@/components/project-structured-data";
+
+<ProjectStructuredData
+  name="Farside"
+  description="A macOS and Windows desktop app that uses your webcam to estimate head yaw and fades the opposite side of the screen when you look away — all on-device, no network, no accounts."
+  url="https://www.shivamtaneja.com/projects/farside"
+  tech={[
+    "Tauri",
+    "Rust",
+    "TypeScript",
+    "MediaPipe",
+    "OpenCV",
+  ]}
+/>
+
+export const metadata = {
+  title: "Farside",
+  description:
+    "Farside is a macOS and Windows desktop app that uses your webcam to estimate head yaw. When you turn left, the right side of the screen fades. When you turn right, the left side fades. All video stays on the device — no network, no accounts.",
+  keywords: [
+    "farside",
+    "tauri app",
+    "head tracking",
+    "webcam head yaw",
+    "mediapipe face landmarker",
+    "opencv solvepnp",
+    "screen fade",
+    "focus app",
+    "desktop app",
+    "rust desktop",
+    "on device",
+    "privacy",
+  ],
+  openGraph: {
+    type: "website",
+    url: "https://www.shivamtaneja.com/projects/farside",
+    images: [
+      {
+        url: "/projects/og-image-farside.png",
+        alt: "Farside | Shivam Taneja",
+        width: 1200,
+        height: 630,
+      },
+    ],
+  },
+  twitter: {
+    card: "summary_large_image",
+    images: ["/projects/og-image-farside.png"],
+  },
+  alternates: {
+    canonical: "https://www.shivamtaneja.com/projects/farside",
+  },
+};
+
+<Wrapper>
+  <article className="flex flex-col gap-6">
+
+    # Farside
+
+    - [View live project](https://farside.shivamtaneja.com/)
+    - [View on GitHub](https://github.com/shivam-taneja/farside)
+
+    <SubSection title="About The Project">
+      Farside brings the iPhone Duo-style screen fade to your desktop. Look left and the right side of your screen fades. Look right and the left fades — nudging you back to centre without interrupting your workflow.
+
+      Everything runs locally. No network, no accounts, no data leaves your device.
+    </SubSection>
+
+    <SubSection title="How It Works">
+      - The camera captures frames locally.
+      - MediaPipe Face Landmarker returns face landmarks from those frames.
+      - OpenCV `solvePnP` converts the landmarks into a yaw angle (left / right).
+      - Yaw is smoothed and mapped to a `0..1` fade amount.
+      - A click-through fullscreen overlay draws the wipe on the opposite side of the screen.
+
+      To calibrate, look straight at the display and press the calibrate shortcut once. That pose is then treated as "facing the screen."
+    </SubSection>
+
+    <SubSection title="Technologies Used">
+      ### Desktop Framework:
+      - Tauri
+
+      <br />
+
+      ### Backend:
+      - Rust
+
+      <br />
+
+      ### Frontend:
+      - TypeScript
+
+      <br />
+
+      ### Computer Vision:
+      - MediaPipe Face Landmarker
+      - OpenCV (`solvePnP`)
+    </SubSection>
+
+    <SubSection title="Features">
+      - **Head yaw tracking**: Detects left/right head turns using face landmarks
+      - **Screen edge fade**: Fades the opposite side of the screen to guide your gaze back
+      - **Click-through overlay**: The fade overlay never blocks your interactions
+      - **One-shot calibration**: Press a shortcut to set your "looking straight" baseline
+      - **Fully on-device**: No network, no accounts, no data ever leaves your machine
+      - **Cross-platform**: Runs on macOS and Windows
+    </SubSection>
+
+    <SubSection title="Current Status">
+      Early. Expect jitter in bad light, with strong backlight, or when the face is only partly in frame. Apps that take exclusive camera access (like video calls) will pause tracking until the camera is free again.
+    </SubSection>
+
+  </article>
+</Wrapper>

@@ -4,7 +4,23 @@ export const sideProjects = [
     projLink: "https://www.bhondugame.com/",
     desc: "a desi turn-based life simulator where every day throws a new, hilariously relatable situation at you.",
     descLink: "/projects/bhondu-game/",
-    userCount: "135 users",
+    userCount: "159 users",
+    activelyWorking: true,
+  },
+  {
+    title: "MyYearOnX",
+    projLink: "https://www.myyearonx.com/",
+    desc: "spotify wrapped but for X (Twitter) - your year on X, beautifully visualized.",
+    descLink: "/projects/myyearonx/",
+    userCount: null,
+    activelyWorking: true,
+  },
+  {
+    title: "Farside",
+    projLink: "https://farside.shivamtaneja.com/",
+    desc: "look away and get the iPhone Duo-style fade. webcam-based, fully on-device.",
+    descLink: "/projects/farside/",
+    userCount: null,
     activelyWorking: true,
   },
   {
@@ -13,7 +29,7 @@ export const sideProjects = [
     desc: "a growing, crowdsourced database of useful-but-forgettable tools and links, with a touch of desi humor.",
     descLink: "/projects/exactlywhatihavebeenlookingfor/",
     userCount: null,
-    activelyWorking: true,
+    activelyWorking: false,
   },
   {
     title: "The Guy She Told You About",

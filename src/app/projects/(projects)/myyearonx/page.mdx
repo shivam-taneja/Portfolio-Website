@@ -1,0 +1,96 @@
+import Wrapper from "@/components/wrapper";
+
+import ProjectStructuredData from "@/components/project-structured-data";
+
+<ProjectStructuredData
+  name="MyYearOnX"
+  description="Spotify Wrapped but for X (Twitter) — your year on X, beautifully visualized."
+  url="https://www.shivamtaneja.com/projects/myyearonx"
+  tech={[
+    "Next.js",
+    "TypeScript",
+    "Twitter/X API",
+    "PostgreSQL",
+    "Redis",
+  ]}
+/>
+
+export const metadata = {
+  title: "MyYearOnX",
+  description:
+    "MyYearOnX is Spotify Wrapped but for X (Twitter). Get a beautiful, shareable recap of your year on X — your top tweets, engagement stats, posting habits, and more, all wrapped up in a stunning visual experience.",
+  keywords: [
+    "myyearonx",
+    "twitter wrapped",
+    "x wrapped",
+    "spotify wrapped for twitter",
+    "year on twitter",
+    "year on x",
+    "twitter stats",
+    "x analytics",
+    "twitter recap",
+  ],
+  openGraph: {
+    type: "website",
+    url: "https://www.shivamtaneja.com/projects/myyearonx",
+    images: [
+      {
+        url: "/projects/og-image-myyearonx.png",
+        alt: "MyYearOnX | Shivam Taneja",
+        width: 1200,
+        height: 630,
+      },
+    ],
+  },
+  twitter: {
+    card: "summary_large_image",
+    images: ["/projects/og-image-myyearonx.png"],
+  },
+  alternates: {
+    canonical: "https://www.shivamtaneja.com/projects/myyearonx",
+  },
+};
+
+<Wrapper>
+  <article className="flex flex-col gap-6">
+
+    # MyYearOnX
+
+    - [View live project](https://www.myyearonx.com/)
+
+    <SubSection title="About The Project">
+      MyYearOnX is Spotify Wrapped but for X (Twitter). At the end of the year, instead of wondering what you were doing on X, you get a beautiful, shareable recap that tells the full story.
+
+      From your most-liked tweets and top threads to your posting streaks, peak engagement hours, and follower growth — MyYearOnX packages your entire year on X into a visually stunning, slide-by-slide experience that you can share with just one click.
+
+      The idea came from the frustration of X's own analytics being buried and bland. MyYearOnX makes your data feel personal, fun, and actually worth sharing.
+    </SubSection>
+
+    <SubSection title="Technologies Used">
+      ### Frontend:
+      - Next.js
+      - TypeScript
+
+      <br />
+
+      ### Backend & API:
+      - Twitter/X API (v2)
+
+      <br />
+
+      ### Database & Caching:
+      - PostgreSQL
+      - Redis
+    </SubSection>
+
+    <SubSection title="Features">
+      - **Year in review**: Top tweets, threads, and moments from your year
+      - **Engagement stats**: Likes, retweets, replies, and impressions breakdown
+      - **Posting habits**: Your most active days, times, and streaks
+      - **Follower growth**: Track how your audience grew over the year
+      - **Shareable slides**: One-click sharing of your wrapped story
+      - **Beautiful visuals**: Stunning, animated slides inspired by Spotify Wrapped
+    </SubSection>
+
+  </article>
+</Wrapper>
