@@ -8,7 +8,7 @@ import TrackedLink from "@/components/tracked-link";
 import Wrapper from "@/components/wrapper";
 import GithubSponsor from "@/components/github-sponsor";
 import { analyticsEvents } from "@/lib/analytics";
-import { Calendar, FileText, MailIcon, MapPin } from "lucide-react";
+import { Calendar, Coffee, FileText, MailIcon, MapPin } from "lucide-react";
 
 export const metadata: Metadata = {
   ...defaultMetadata,
@@ -108,8 +108,23 @@ const ContactPage = () => {
               </p>
             </TrackedLink>
 
-            <div className="flex md:justify-start justify-center w-full mt-4">
+            <div className="flex md:justify-start justify-center w-full mt-4 gap-4 items-center">
               <GithubSponsor variant="button" />
+
+              <TrackedLink
+                href="https://buymeacoffee.com/codesbyshivam"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="flex items-center gap-2 bg-[#f6f8fa] dark:bg-[#21262d] border border-[rgba(27,31,36,0.15)] dark:border-[rgba(240,246,252,0.1)] text-[#24292f] dark:text-[#c9d1d9] px-3 h-[32px] rounded-[6px] font-medium text-sm transition-colors hover:bg-[#f3f4f6] dark:hover:bg-[#30363d]"
+                analyticsEvent={analyticsEvents.outboundLinkClicked}
+                analyticsProperties={{
+                  source: "contact_page",
+                  destination: "buy_me_a_coffee",
+                }}
+              >
+                <Coffee className="h-4 w-4 text-[#f59e0b]" />
+                <span>Buy me a coffee</span>
+              </TrackedLink>
             </div>
           </div>
         </div>
