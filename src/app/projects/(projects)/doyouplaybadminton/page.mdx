@@ -1,0 +1,90 @@
+import Wrapper from "@/components/wrapper";
+
+import ProjectStructuredData from "@/components/project-structured-data";
+
+<ProjectStructuredData
+  name="Do You Play Badminton"
+  description="A shareable player card with your name, area, level, Instagram, and a QR code. The details live in the link. The site also lists apps, groups, and courts in Bengaluru, and emails you when a court has a discount."
+  url="https://www.shivamtaneja.com/projects/doyouplaybadminton"
+  tech={[
+    "Next.js",
+    "React",
+    "TypeScript",
+    "Tailwind CSS",
+    "Resend",
+  ]}
+/>
+
+export const metadata = {
+  title: "Do You Play Badminton",
+  description:
+    "Do You Play Badminton is a card you can send when someone asks if you play: your name, area, level, Instagram, and a QR code. Nothing on the card is saved. It also lists apps, groups, and courts in Bengaluru, and lets you hear when a court has a discount.",
+  keywords: [
+    "do you play badminton",
+    "doyouplaybadminton",
+    "badminton",
+    "bengaluru badminton",
+    "player card",
+    "badminton courts",
+  ],
+  openGraph: {
+    type: "website",
+    url: "https://www.shivamtaneja.com/projects/doyouplaybadminton",
+    images: [
+      {
+        url: "/projects/og-image-doyouplaybadminton.png",
+        alt: "Do You Play Badminton | Shivam Taneja",
+        width: 1200,
+        height: 630,
+      },
+    ],
+  },
+  twitter: {
+    card: "summary_large_image",
+    images: ["/projects/og-image-doyouplaybadminton.png"],
+  },
+  alternates: {
+    canonical: "https://www.shivamtaneja.com/projects/doyouplaybadminton",
+  },
+};
+
+<Wrapper>
+  <article className="flex flex-col gap-6">
+
+    # Do You Play Badminton
+
+    - [View live project](https://www.doyouplaybadminton.com/)
+
+    <SubSection title="About The Project">
+      doyouplaybadminton.com is the question. This site is the answer.
+
+      Someone asks if you play. You send them a card: your name, area, level, Instagram, and a QR code that opens the same card. The details live in the link. Nothing about the card is saved.
+
+      The rest is for players in Bengaluru. A short list of apps, groups, and courts by area, and a way to hear when a court has a discount.
+    </SubSection>
+
+    <SubSection title="Why">
+      I bought the domain because the name is the whole idea. A card you can post or pass around answers “do you play badminton?” Bengaluru is where I play, so the places and the discount list stay local.
+    </SubSection>
+
+    <SubSection title="Technologies Used">
+      ### Web App:
+      - [Next.js](https://nextjs.org), React, and TypeScript
+      - [Tailwind CSS](https://tailwindcss.com)
+      - Bricolage Grotesque and Manrope
+
+      <br />
+
+      ### Card:
+      - QR codes on the card
+
+      <br />
+
+      ### Signup and hosting:
+      - Discount emails through [Resend](https://resend.com), saved in a Google Sheet
+      - [reCAPTCHA](https://www.google.com/recaptcha) on the signup form
+      - Hosted on [Vercel](https://vercel.com)
+    </SubSection>
+
+  </article>
+</Wrapper>

@@ -1,10 +1,18 @@
 export const sideProjects = [
   {
+    title: "Do You Play Badminton",
+    projLink: "https://www.doyouplaybadminton.com/",
+    desc: "a shareable player card for when someone asks if you play, plus courts and discount alerts in Bengaluru.",
+    descLink: "/projects/doyouplaybadminton/",
+    userCount: "13 users",
+    activelyWorking: false,
+  },
+  {
     title: "Bhondu Life",
     projLink: "https://www.bhondugame.com/",
     desc: "a desi turn-based life simulator where every day throws a new, hilariously relatable situation at you.",
     descLink: "/projects/bhondu-game/",
-    userCount: "159 users",
+    userCount: "170 users",
     activelyWorking: true,
   },
   {
