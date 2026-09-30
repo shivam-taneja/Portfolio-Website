@@ -11,6 +11,16 @@ import { Tooltip, TooltipContent, TooltipTrigger } from "../ui/tooltip";
 import TrackedLink from "../tracked-link";
 
 const SideProjectsSection = () => {
+  const projects = [...sideProjects].sort((a, b) => {
+    const active = Number(b.activelyWorking) - Number(a.activelyWorking);
+    if (active !== 0) return active;
+
+    const count = (value: string | null) =>
+      Number(value?.match(/\d+/)?.[0] ?? 0);
+
+    return count(b.userCount) - count(a.userCount);
+  });
+
   return (
     <section aria-labelledby="projects-heading">
       <div className="flex flex-col gap-2">
@@ -38,7 +48,7 @@ const SideProjectsSection = () => {
         <ul className="flex flex-col gap-4">
           <ChatBotProject />
 
-          {sideProjects.slice(0, 4).map((item, idx) => (
+          {projects.slice(0, 4).map((item, idx) => (
             <li
               className="dark:text-neutral-400 text-neutral-600 flex w-full gap-4 items-start justify-between"
               key={idx}

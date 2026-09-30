@@ -1,0 +1,90 @@
+import Wrapper from "@/components/wrapper";
+
+import ProjectStructuredData from "@/components/project-structured-data";
+
+<ProjectStructuredData
+  name="Yeet"
+  description="A Chrome extension that carries posts between X and Threads. Write in one place and it lands in the other, using the session you are already logged into. Nothing is saved."
+  url="https://www.shivamtaneja.com/projects/yeet"
+  repo="https://github.com/shivam-taneja/yeet"
+  tech={["WXT", "React", "TypeScript", "Tailwind CSS"]}
+/>
+
+export const metadata = {
+  title: "Yeet",
+  description:
+    "Yeet is a free, open-source Chrome extension that cross-posts between X and Threads. Write once and it lands on the other platform. No copy-paste, no stored posts, no passwords.",
+  keywords: [
+    "yeet",
+    "x to threads",
+    "threads to x",
+    "cross post",
+    "chrome extension",
+    "twitter threads sync",
+  ],
+  openGraph: {
+    type: "website",
+    url: "https://www.shivamtaneja.com/projects/yeet",
+    images: [
+      {
+        url: "/projects/og-image-yeet.png",
+        alt: "Yeet | Shivam Taneja",
+        width: 1200,
+        height: 630,
+      },
+    ],
+  },
+  twitter: {
+    card: "summary_large_image",
+    images: ["/projects/og-image-yeet.png"],
+  },
+  alternates: {
+    canonical: "https://www.shivamtaneja.com/projects/yeet",
+  },
+};
+
+<Wrapper>
+  <article className="flex flex-col gap-6">
+
+    # Yeet
+
+    - [View live project](https://yeet.shivamtaneja.com/)
+    - [View on GitHub](https://github.com/shivam-taneja/yeet)
+    - [Get it on the Chrome Web Store](https://chromewebstore.google.com/detail/knbfidiiikhjebpijhafdikkjhbgbefe)
+
+    <SubSection title="About The Project">
+      Yeet carries your posts between X and Threads automatically. Type it in one place, and it lands in the other — same moment, no copy-paste.
+
+      It is a Chrome extension that runs in the browser. When you compose a post on X or Threads, it captures the text and submits it to the other platform in the background, using the session you are already logged into. There is no database. Nothing about the post is saved.
+    </SubSection>
+
+    <SubSection title="How It Works">
+      - Post on X, and it lands on Threads. Post on Threads, and it lands on X.
+      - Yeet uses the accounts you are already logged into. It never asks for passwords or stores login tokens.
+      - You can pause a direction and see what landed without leaving the page you are on.
+    </SubSection>
+
+    <SubSection title="Technologies Used">
+      ### Extension:
+      - [WXT](https://wxt.dev)
+      - React
+      - TypeScript
+
+      <br />
+
+      ### UI:
+      - [Tailwind CSS](https://tailwindcss.com)
+      - shadcn
+      - Bricolage Grotesque, Geist, and Space Grotesk
+    </SubSection>
+
+    <SubSection title="Features">
+      - **Two-way by default**: X to Threads and Threads to X
+      - **Write once**: The same words land on both timelines
+      - **No copy-paste**: No re-typing and no second post to remember
+      - **Runs locally**: No server, no stored posts
+      - **Free and open source**
+    </SubSection>
+
+  </article>
+</Wrapper>

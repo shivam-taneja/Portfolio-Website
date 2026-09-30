@@ -1,21 +1,5 @@
 export const sideProjects = [
   {
-    title: "Do You Play Badminton",
-    projLink: "https://www.doyouplaybadminton.com/",
-    desc: "a shareable player card for when someone asks if you play, plus courts and discount alerts in Bengaluru.",
-    descLink: "/projects/doyouplaybadminton/",
-    userCount: "13 users",
-    activelyWorking: false,
-  },
-  {
-    title: "Bhondu Life",
-    projLink: "https://www.bhondugame.com/",
-    desc: "a desi turn-based life simulator where every day throws a new, hilariously relatable situation at you.",
-    descLink: "/projects/bhondu-game/",
-    userCount: "170 users",
-    activelyWorking: true,
-  },
-  {
     title: "MyYearOnX",
     projLink: "https://www.myyearonx.com/",
     desc: "spotify wrapped but for X (Twitter) - your year on X, beautifully visualized.",
@@ -29,7 +13,31 @@ export const sideProjects = [
     desc: "look away and get the iPhone Duo-style fade. webcam-based, fully on-device.",
     descLink: "/projects/farside/",
     userCount: null,
+    activelyWorking: false,
+  },
+  {
+    title: "Yeet",
+    projLink: "https://yeet.shivamtaneja.com/",
+    desc: "write a post on X or Threads and it lands on the other. no copy-paste.",
+    descLink: "/projects/yeet/",
+    userCount: "4 users",
     activelyWorking: true,
+  },
+  {
+    title: "Bhondu Life",
+    projLink: "https://www.bhondugame.com/",
+    desc: "a desi turn-based life simulator where every day throws a new, hilariously relatable situation at you.",
+    descLink: "/projects/bhondu-game/",
+    userCount: "170 users",
+    activelyWorking: false,
+  },
+  {
+    title: "Do You Play Badminton",
+    projLink: "https://www.doyouplaybadminton.com/",
+    desc: "a shareable player card for when someone asks if you play, plus courts and discount alerts in Bengaluru.",
+    descLink: "/projects/doyouplaybadminton/",
+    userCount: "13 users",
+    activelyWorking: false,
   },
   {
     title: "Exactly What I Have Been Looking For",

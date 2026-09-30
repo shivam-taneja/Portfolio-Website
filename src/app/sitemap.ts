@@ -143,6 +143,12 @@ export default async function sitemaps(): Promise<MetadataRoute.Sitemap> {
       changeFrequency: "yearly",
     },
     {
+      url: "https://www.shivamtaneja.com/projects/yeet",
+      lastModified: new Date(),
+      priority: 0.6,
+      changeFrequency: "yearly",
+    },
+    {
       url: "https://www.shivamtaneja.com/projects/doyouplaybadminton",
       lastModified: new Date(),
       priority: 0.6,
