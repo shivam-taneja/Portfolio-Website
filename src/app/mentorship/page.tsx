@@ -28,12 +28,22 @@ export const metadata: Metadata = {
     description:
       "Explore my contributions as a mentor and judge in various hackathons and tech events.",
     ...defaultMetadata.openGraph,
+    url: "https://www.shivamtaneja.com/mentorship",
+    images: [
+      {
+        url: "/og/mentorship",
+        alt: "Mentorship | Shivam Taneja",
+        width: 1200,
+        height: 630,
+      },
+    ],
   },
   twitter: {
     title: "Mentorship & Judging | Shivam Taneja",
     description:
       "Explore my contributions as a mentor and judge in various hackathons and tech events.",
     ...defaultMetadata.twitter,
+    images: ["/og/mentorship"],
   },
 };
 

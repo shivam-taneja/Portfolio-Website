@@ -21,12 +21,22 @@ export const metadata: Metadata = {
     description:
       "Detailed professional experience and career journey of Shivam Taneja.",
     ...defaultMetadata.openGraph,
+    url: "https://www.shivamtaneja.com/experience",
+    images: [
+      {
+        url: "/og/experience",
+        alt: "Experience | Shivam Taneja",
+        width: 1200,
+        height: 630,
+      },
+    ],
   },
   twitter: {
     title: "Experience | Shivam Taneja",
     description:
       "Detailed professional experience and career journey of Shivam Taneja.",
     ...defaultMetadata.twitter,
+    images: ["/og/experience"],
   },
 };
 

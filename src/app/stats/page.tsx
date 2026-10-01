@@ -29,12 +29,22 @@ export const metadata: Metadata = {
     description:
       "Privacy-safe aggregate portfolio stats including visits, project activity, traffic sources, and chatbot activity.",
     ...defaultMetadata.openGraph,
+    url: "https://www.shivamtaneja.com/stats",
+    images: [
+      {
+        url: "/og/stats",
+        alt: "Stats | Shivam Taneja",
+        width: 1200,
+        height: 630,
+      },
+    ],
   },
   twitter: {
     title: "Stats | Shivam Taneja",
     description:
       "Privacy-safe aggregate portfolio stats including visits, project activity, traffic sources, and chatbot activity.",
     ...defaultMetadata.twitter,
+    images: ["/og/stats"],
   },
 };
 

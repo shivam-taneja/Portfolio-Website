@@ -23,12 +23,22 @@ export const metadata: Metadata = {
     description:
       "Get in touch with Shivam Taneja. I'm always open to discussing new projects, creative ideas, or opportunities to be part of your vision.",
     ...defaultMetadata.openGraph,
+    url: "https://www.shivamtaneja.com/contact",
+    images: [
+      {
+        url: "/og/contact",
+        alt: "Contact | Shivam Taneja",
+        width: 1200,
+        height: 630,
+      },
+    ],
   },
   twitter: {
     title: "Contact Me | Shivam Taneja",
     description:
       "Get in touch with Shivam Taneja. I'm always open to discussing new projects, creative ideas, or opportunities to be part of your vision.",
     ...defaultMetadata.twitter,
+    images: ["/og/contact"],
   },
 };
 

@@ -30,12 +30,22 @@ export const metadata: Metadata = {
     description:
       "Explore all projects by Shivam Taneja including web applications, AI tools, and open source contributions.",
     ...defaultMetadata.openGraph,
+    url: "https://www.shivamtaneja.com/projects",
+    images: [
+      {
+        url: "/og/projects",
+        alt: "Projects | Shivam Taneja",
+        width: 1200,
+        height: 630,
+      },
+    ],
   },
   twitter: {
     title: "Projects | Shivam Taneja",
     description:
       "Explore all projects by Shivam Taneja including web applications, AI tools, and open source contributions.",
     ...defaultMetadata.twitter,
+    images: ["/og/projects"],
   },
 };
 

@@ -15,12 +15,14 @@ export default function ProjectStructuredData({
   repo,
   tech,
 }: Props) {
+  const slug = url.split("/").filter(Boolean).pop();
   const data = {
     "@context": "https://schema.org",
     "@type": "SoftwareSourceCode",
     "name": name,
     "description": description,
     "url": url,
+    "image": `https://www.shivamtaneja.com/og/projects/${slug}`,
     "author": {
       "@id": "https://www.shivamtaneja.com/#person"
     },

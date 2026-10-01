@@ -9,8 +9,8 @@ export const defaultMetadata: Partial<Metadata> = {
     locale: "en_US",
     images: [
       {
-        url: "/og-image.png",
-        alt: "Contact Shivam Taneja - Full Stack Developer",
+        url: "/og/home",
+        alt: "Shivam Taneja",
         width: 1200,
         height: 630,
       },
@@ -19,7 +19,7 @@ export const defaultMetadata: Partial<Metadata> = {
   twitter: {
     card: "summary_large_image",
     creator: "@codesbyshivam",
-    images: ["/og-image.png"],
+    images: ["/og/home"],
   },
   keywords: [
     "Shivam Taneja",

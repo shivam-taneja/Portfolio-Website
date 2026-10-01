@@ -16,7 +16,7 @@ const StructuredData = () => {
         url: "https://www.shivamtaneja.com",
         image: {
           "@type": "ImageObject",
-          url: "https://www.shivamtaneja.com/og-image.png",
+          url: "https://www.shivamtaneja.com/og/home",
           width: 1200,
           height: 630,
         },

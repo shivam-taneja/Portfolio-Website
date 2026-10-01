@@ -1,4 +1,20 @@
-export const sideProjects = [
+import type { ProjectOgOverride } from "@/types/og.types";
+
+export type SideProject = {
+  title: string;
+  projLink: string;
+  desc: string;
+  descLink: string;
+  userCount: string | null;
+  activelyWorking: boolean;
+
+  /** Short stack shown on the social card. */
+  tags: string[];
+  /** Card copy when it should differ from the listing title or description. */
+  og?: ProjectOgOverride;
+};
+
+export const sideProjects: SideProject[] = [
   {
     title: "MyYearOnX",
     projLink: "https://www.myyearonx.com/",
@@ -6,6 +22,11 @@ export const sideProjects = [
     descLink: "/projects/myyearonx/",
     userCount: null,
     activelyWorking: true,
+    tags: ["Next.js", "TypeScript", "Twitter/X API", "PostgreSQL"],
+    og: {
+      description:
+        "spotify wrapped but for X (Twitter) — your year on X, beautifully visualized.",
+    },
   },
   {
     title: "Farside",
@@ -14,6 +35,7 @@ export const sideProjects = [
     descLink: "/projects/farside/",
     userCount: null,
     activelyWorking: false,
+    tags: ["Tauri", "Rust", "TypeScript", "MediaPipe"],
   },
   {
     title: "Yeet",
@@ -22,6 +44,7 @@ export const sideProjects = [
     descLink: "/projects/yeet/",
     userCount: "4 users",
     activelyWorking: true,
+    tags: ["WXT", "React", "TypeScript", "Tailwind CSS"],
   },
   {
     title: "Bhondu Life",
@@ -30,6 +53,7 @@ export const sideProjects = [
     descLink: "/projects/bhondu-game/",
     userCount: "170 users",
     activelyWorking: false,
+    tags: ["React Native", "Next.js", "NestJS", "Firebase"],
   },
   {
     title: "Do You Play Badminton",
@@ -38,6 +62,7 @@ export const sideProjects = [
     descLink: "/projects/doyouplaybadminton/",
     userCount: "13 users",
     activelyWorking: false,
+    tags: ["Next.js", "React", "TypeScript", "Tailwind CSS"],
   },
   {
     title: "Exactly What I Have Been Looking For",
@@ -46,6 +71,11 @@ export const sideProjects = [
     descLink: "/projects/exactlywhatihavebeenlookingfor/",
     userCount: null,
     activelyWorking: false,
+    tags: ["Next.js"],
+    og: {
+      description:
+        "a growing, crowdsourced database of useful-but-forgettable tools and links.",
+    },
   },
   {
     title: "The Guy She Told You About",
@@ -54,6 +84,11 @@ export const sideProjects = [
     descLink: "/projects/theguyshetoldyouabout/",
     userCount: null,
     activelyWorking: false,
+    tags: ["Next.js"],
+    og: {
+      description:
+        "another profile, bought because the domain was too fun to leave alone.",
+    },
   },
   {
     title: "GraphMySelf",
@@ -62,6 +97,11 @@ export const sideProjects = [
     descLink: "/projects/graphmyself/",
     userCount: "5 users",
     activelyWorking: false,
+    tags: ["NestJS", "Next.js", "PostgreSQL", "pgvector"],
+    og: {
+      description:
+        "a personal AI memory layer that knows who you are, so every AI tool stops starting from zero.",
+    },
   },
   {
     title: "MySkillRoad",
@@ -70,6 +110,11 @@ export const sideProjects = [
     descLink: "/projects/myskill-road/",
     userCount: null,
     activelyWorking: false,
+    tags: ["Next.js", "React", "Prisma", "PostgreSQL"],
+    og: {
+      description:
+        "a personalized learning roadmap that tracks your growth and tells you what to learn next.",
+    },
   },
   {
     title: "EZNotify",
@@ -78,6 +123,11 @@ export const sideProjects = [
     descLink: "/projects/eznotify/",
     userCount: null,
     activelyWorking: false,
+    tags: ["Next.js", "TypeScript", "Notification APIs"],
+    og: {
+      description:
+        "a developer-friendly SDK for email, SMS, WhatsApp, push, and the rest.",
+    },
   },
   {
     title: "DecodeMyCode",
@@ -86,6 +136,11 @@ export const sideProjects = [
     descLink: "/projects/decode-mycode/",
     userCount: "5 users",
     activelyWorking: false,
+    tags: ["AI", "Code Analysis", "Developer Tools", "SaaS"],
+    og: {
+      description:
+        "an AI tool that turns code into explanations, flowcharts, and summaries.",
+    },
   },
   {
     title: "CollabWrite",
@@ -94,6 +149,7 @@ export const sideProjects = [
     descLink: "/projects/collab-write/",
     userCount: "10 users",
     activelyWorking: false,
+    tags: ["Next.js", "React", "Appwrite", "Tiptap"],
   },
   {
     title: "NagarIQ",
@@ -102,6 +158,10 @@ export const sideProjects = [
     descLink: "/projects/nagar-iq/",
     userCount: "12 users",
     activelyWorking: false,
+    tags: ["React Native", "Appwrite", "Data Visualization"],
+    og: {
+      description: "a gamified, real-time city data and quiz platform.",
+    },
   },
   {
     title: "Tilt Bot",
@@ -110,6 +170,7 @@ export const sideProjects = [
     descLink: "/projects/tilt-bot/",
     userCount: "05 users",
     activelyWorking: false,
+    tags: ["Next.js", "React", "NestJS", "Groq AI"],
   },
   {
     title: "Chat Mingle",
@@ -118,6 +179,10 @@ export const sideProjects = [
     descLink: "/projects/chat-mingle/",
     userCount: "19 users",
     activelyWorking: false,
+    tags: ["React", "Firebase", "SASS", "Vite"],
+    og: {
+      description: "a fun, experimental real-time chat app.",
+    },
   },
   {
     title: "Circle Catcher",
@@ -126,6 +191,7 @@ export const sideProjects = [
     descLink: "/projects/circle-catcher/",
     userCount: "09 users",
     activelyWorking: false,
+    tags: ["JavaScript", "HTML5 Canvas", "CSS"],
   },
   {
     title: "Career Guide Hub (Freelance)",
@@ -134,5 +200,11 @@ export const sideProjects = [
     descLink: "/projects/career-guidance/",
     userCount: null,
     activelyWorking: false,
+    tags: ["Next.js", "React", "TypeScript", "Node.js"],
+    og: {
+      name: "Career Guide Hub",
+      description:
+        "assessments that turn into a personalized career recommendation.",
+    },
   },
 ];

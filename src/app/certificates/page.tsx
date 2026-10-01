@@ -26,11 +26,21 @@ export const metadata: Metadata = {
     title: "Certificates | Shivam Taneja - Full Stack Developer",
     description: "Explore all certificates and achievements by Shivam Taneja.",
     ...defaultMetadata.openGraph,
+    url: "https://www.shivamtaneja.com/certificates",
+    images: [
+      {
+        url: "/og/certificates",
+        alt: "Certificates | Shivam Taneja",
+        width: 1200,
+        height: 630,
+      },
+    ],
   },
   twitter: {
     title: "Certificates | Shivam Taneja",
     description: "Explore all certificates and achievements by Shivam Taneja.",
     ...defaultMetadata.twitter,
+    images: ["/og/certificates"],
   },
 };
 
