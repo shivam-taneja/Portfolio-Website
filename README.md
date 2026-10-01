@@ -45,6 +45,7 @@ The home page features a custom-built 3D folding scroll effect. This creates the
 - AI-powered chatbot using Groq and Mem0 for contextual memory
 - Email contact form
 - MDX support for rich content
+- Dynamic Open Graph cards for pages and projects
 
 ## 🛠️ Technologies Used
 
@@ -130,6 +131,30 @@ yarn email
 ```
 
 This will start a local server to preview email templates.
+
+## 🖼️ Open Graph images
+
+Link previews are generated with `next/og` from one shared card. There is no static PNG for them.
+
+The layout follows this design reference: [OG Playground](https://og-playground.vercel.app/?share=xVdtj6M2EP4rFqdTEolNgLyjzarp7p0uba-tLqvbD91-MGCI9wAj4ySbRtvf3jGEdzbdVK1qKcF4bM_MMzOPzVGxmUMUU7l26O4xRCgWB58sjkfZR2hDqLcRJuromva-o6aDe-qITW3MoXHk4wOMuj55zkZl_45yYgvKQpDZzN8GYSaNWExPAk58LOiOZCK2I9z12R5EG-o4JF9jYfubx9k2dG6ZzzjI32lYczS7OWEVYI-Y6ShCHZ-GBPMrj2OHklB09YnmEE9F7zRXH-kG0t7L_gx2myPpWS_bEYxOFZEZcUmuyGWh-IgD6kunAxayOML2yYGXl8fwRnYyVOu4VpzHVgy4iNx5hASLTKSpyCcugA8dnoYBehYTggWym01uh_51JFqw4J6Fu8Z4rGY_ra-NekiPnlUkOA7BNQ7z5EAPrKqtnqdAXrJJm5Vr-gcBJ0Za9IzkXzZHgonQAPA8j-hrOGCfeuFKkCCWGQgWEF4II-w4NPRkNk9A79Ao9IJtjDuEf39CvAOGI4gUdVpdnbU6lWVpukJTjYlqjGD6NJ-dupdkS-pd7ljDo6zy9JGaV6bsp3Z-gXBswcf5fA5DzTpxZ1N9qsMuAeYeDb-c1htgQYLuf67fslxj9P_pn1lj2510LlCXGvpTUoT6RE1KPs1SfaoWvDDD8-nckBuftkXoz8F-w4AcTmoGoOdylR28FQzGSmrHkhMEZPAayCbJ2-F5Q9afVl-Xn--XP3_4Ydm__eVz3aCsl5XWGdPkA0xQ2wuqVEkaGkMtlcx4w8Ztp0Sh8bT3KWVGs7KHBSG0kcI5YpAtxfte8i1UZ1lSoD5tCh5O2TfVqjJJjZ-yzOxrRlVYjdxVVVo5T2Kgy6uYcOqWzU2pQrbce4jwhu5wgO5xSJ5wDkoprG_OugwFeH1-SCttIl8LJIC6ai4OISPP5R-oBt4PC93F5LQca3SQhHYwuB7IVfVdbtbMFXs4RRAJYQkhHNkcuwLgRBFnzjbJoORgImiN8VpF67sfY4RDBy1_XcX92rYXoiQfDxwDSJ09PKq4DSWPlQw-_ta5P0RkbXMaCZjaufXZ1pGd5Sr5jyJ0R3ad3_sBjrpd0UOLG9QtJ0Q1sWX7Rg6Lo8iTIG1tGS_buayXrahXefDpo_LBl7UqU1dTXbYq8U5ekV90dOZLmwQO1zSsz5pTS_zYNKGenLUJRUnJVoqfbDWsyzQuW6-XiysMX8mqf8p9bST779FeHvxhZbgaT7irVIS1-2TLlXo4Lm6C-nCuzg247UwgxBO4NjZHtXGvEvlWfrumgVc2I-b24lHZCBHF5mCw3-_7ccKAIiHAvs2CwYZgJ94w0Y9C71EpL04uEIujMZ5UIpteJprjedxqwAANMusJgvaRynPalp8rMjrF2uyGUc-atxNx7cLRPPmN_t9y73fy4y62DilC55K16KVPRVVYJHMyVsyjksCmmHNtqCopVoo5gqNPcYi19RTTxX5MVIUE7IlK1oPvSbFP3mAf6cSHwCKOYgq-JS-qIrAFM74SbhNfefkL).
+
+**Routes:**
+
+- `/` uses `/og/home`
+- `/projects` uses `/og/projects`
+- `/contact`, `/experience`, `/certificates`, `/mentorship`, and `/stats` use `/og/{page}`
+- Each project page uses `/og/projects/{slug}`
+
+**Where to edit the copy:**
+
+- Homepage: `src/lib/og/home.ts`
+- Projects index: `src/lib/og/projects-index.ts`
+- Contact, experience, certificates, mentorship, and stats: `src/lib/og/pages.ts`
+- Individual projects: `src/lib/constants/side-projects.ts`. Set `tags` for the stack, and `og` when the card title, description, or accent should differ from the listing. Ask Shivam is the extra entry in `src/lib/og/projects.ts`.
+
+The portrait is `public/headshot.png`. Fonts live in `src/assets/fonts/`. Shared types are in `src/types/og.types.ts`.
+
+Each card keeps one accent from the palette, so the preview does not change between requests. Set `accent` on a card to pin a color.
 
 ## 📚 Technical Documentation
 
