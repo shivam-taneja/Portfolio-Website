@@ -6,7 +6,7 @@ export const homeOg: OgCardContent = {
   path: "~/whoami",
   title: "Shivam Taneja",
   description:
-    "Software engineer crafting production-grade SaaS, SDKs and APIs.",
+    "I ship end-to-end products — from idea to something people use.",
   tags: ["TypeScript", "Cloud", "AI", "App Dev"],
   titleSize: 70,
 };
