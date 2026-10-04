@@ -4,13 +4,14 @@ import ProjectStructuredData from "@/components/project-structured-data";
 
 <ProjectStructuredData
   name="Do You Play Badminton"
-  description="A shareable player card with your name, area, level, Instagram, and a QR code. The details live in the link. The site also lists apps, groups, and courts in Bengaluru, and emails you when a court has a discount."
+  description="A shareable badminton player card with connectors and a QR code, plus Timing Smash — a practice and ranked timing arcade with a weekly leaderboard. Also lists apps, groups, and courts in Bengaluru, and emails you when a court has a discount."
   url="https://www.shivamtaneja.com/projects/doyouplaybadminton"
   tech={[
     "Next.js",
     "React",
     "TypeScript",
     "Tailwind CSS",
+    "Firebase",
     "Resend",
   ]}
 />
@@ -18,7 +19,7 @@ import ProjectStructuredData from "@/components/project-structured-data";
 export const metadata = {
   title: "Do You Play Badminton",
   description:
-    "Do You Play Badminton is a card you can send when someone asks if you play: your name, area, level, Instagram, and a QR code. Nothing on the card is saved. It also lists apps, groups, and courts in Bengaluru, and lets you hear when a court has a discount.",
+    "Do You Play Badminton is a card you can send when someone asks if you play: your name, area, level, Instagram, court-app links, and a QR code. Timing Smash lets you practice free or sign in for ranked runs and a weekly leaderboard. It also lists apps, groups, and courts in Bengaluru, and lets you hear when a court has a discount.",
   keywords: [
     "do you play badminton",
     "doyouplaybadminton",
@@ -26,6 +27,9 @@ export const metadata = {
     "bengaluru badminton",
     "player card",
     "badminton courts",
+    "Timing Smash",
+    "badminton arcade",
+    "badminton leaderboard",
   ],
   openGraph: {
     type: "website",
@@ -54,17 +58,28 @@ export const metadata = {
     # Do You Play Badminton
 
     - [View live project](https://www.doyouplaybadminton.com/)
+    - [Play Timing Smash](https://www.doyouplaybadminton.com/smash)
 
     <SubSection title="About The Project">
       doyouplaybadminton.com is the question. This site is the answer.
 
-      Someone asks if you play. You send them a card: your name, area, level, Instagram, and a QR code that opens the same card. The details live in the link. Nothing about the card is saved.
+      Someone asks if you play. You send them a card: your name, area, level, Instagram, optional Playo and other court-app links, a calendar of upcoming games, and a QR code that opens the same card. The details live in the link. Nothing about the card is saved.
+
+      Timing Smash is the arcade layer. Tap when the shuttle hits the sweet spot. Practice is free; ranked needs a Google sign-in and feeds a weekly leaderboard.
 
       The rest is for players in Bengaluru. A short list of apps, groups, and courts by area, and a way to hear when a court has a discount.
     </SubSection>
 
     <SubSection title="Why">
-      I bought the domain because the name is the whole idea. A card you can post or pass around answers “do you play badminton?” Bengaluru is where I play, so the places and the discount list stay local.
+      I bought the domain because the name is the whole idea. A card you can post or pass around answers “do you play badminton?” Bengaluru is where I play, so the places and the discount list stay local. Timing Smash came next — a quick way to stay on the site after the card.
+    </SubSection>
+
+    <SubSection title="Features">
+      - **Player card**: Name, area, level, Instagram, QR, and optional connectors (Playo, Calendar, Hudle, Game Theory, KheloMore). Share the link or download the image.
+      - **Timing Smash — Practice**: No account. Shorter runs, gentler flights, so you can warm up.
+      - **Timing Smash — Ranked**: Sign in with Google, play a scored run, and land on the weekly leaderboard (best run and average).
+      - **Bengaluru guide**: Apps, groups, and courts by area.
+      - **Discount alerts**: Email signup when a court has a deal.
     </SubSection>
 
     <SubSection title="Technologies Used">
@@ -77,6 +92,13 @@ export const metadata = {
 
       ### Card:
       - QR codes on the card
+      - Dynamic OG and downloadable pass images
+
+      <br />
+
+      ### Timing Smash:
+      - [Firebase](https://firebase.google.com) Auth (Google) and Firestore for ranked games and the weekly leaderboard
+      - Practice mode runs fully client-side
 
       <br />
 

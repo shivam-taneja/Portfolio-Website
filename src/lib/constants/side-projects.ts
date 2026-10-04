@@ -58,11 +58,11 @@ export const sideProjects: SideProject[] = [
   {
     title: "Do You Play Badminton",
     projLink: "https://www.doyouplaybadminton.com/",
-    desc: "a shareable player card for when someone asks if you play, plus courts and discount alerts in Bengaluru.",
+    desc: "someone asks if you play. you send the card. plus mini games.",
     descLink: "/projects/doyouplaybadminton/",
     userCount: "13 users",
-    activelyWorking: false,
-    tags: ["Next.js", "React", "TypeScript", "Tailwind CSS"],
+    activelyWorking: true,
+    tags: ["Next.js", "React", "TypeScript", "Tailwind CSS", "Firebase"],
   },
   {
     title: "Exactly What I Have Been Looking For",
