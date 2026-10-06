@@ -9,8 +9,7 @@ import { useIsFirstLoad, useSetFirstLoad } from "@/store/loading-store";
 import { BackToTop } from "./back-to-top";
 import { ThemeToggle } from "./theme-toggle";
 import { useTheme } from "next-themes";
-import { ToastContainer } from "react-toastify";
-import "react-toastify/dist/ReactToastify.css";
+import { toast, ToastContainer } from "react-toastify";
 
 const SmoothScroll = ({ children }: { children: React.ReactNode }) => {
   const { resolvedTheme } = useTheme();
