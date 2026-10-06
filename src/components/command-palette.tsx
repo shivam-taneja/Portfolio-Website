@@ -22,6 +22,7 @@ import {
   Sun,
   Laptop,
   FolderOpen,
+  Share2,
 } from "lucide-react";
 import { analyticsEvents, captureEvent } from "@/lib/analytics";
 
@@ -113,6 +114,14 @@ export function CommandPalette() {
             >
               <User className="mr-2 h-4 w-4" />
               <span>Contact Me</span>
+            </CommandItem>
+            <CommandItem
+              onSelect={() =>
+                runCommand("socials", () => router.push("/socials"))
+              }
+            >
+              <Share2 className="mr-2 h-4 w-4" />
+              <span>Socials</span>
             </CommandItem>
             <CommandItem
               onSelect={() =>
