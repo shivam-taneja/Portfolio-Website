@@ -1,5 +1,7 @@
 export const analyticsEvents = {
   backToHomeClicked: "back_to_home_clicked",
+  backToTopClicked: "back_to_top_clicked",
+
   calendlyOpened: "calendly_opened",
   certificateOpened: "certificate_opened",
   chatbotError: "chatbot_error",

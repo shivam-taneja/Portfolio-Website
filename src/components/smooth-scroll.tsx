@@ -6,6 +6,7 @@ import { usePathname } from "next/navigation";
 
 import { useIsFirstLoad, useSetFirstLoad } from "@/store/loading-store";
 
+import { BackToTop } from "./back-to-top";
 import { ThemeToggle } from "./theme-toggle";
 import { useTheme } from "next-themes";
 import { ToastContainer } from "react-toastify";
@@ -43,6 +44,8 @@ const SmoothScroll = ({ children }: { children: React.ReactNode }) => {
       />
 
       {children}
+
+      <BackToTop />
 
       <div className="right-4 hidden xl:block fixed xl:top-6 z-[999]">
         <ThemeToggle />
