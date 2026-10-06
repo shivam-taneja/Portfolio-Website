@@ -142,14 +142,14 @@ The layout follows this design reference: [OG Playground](https://og-playground.
 
 - `/` uses `/og/home`
 - `/projects` uses `/og/projects`
-- `/contact`, `/experience`, `/certificates`, `/mentorship`, and `/stats` use `/og/{page}`
+- `/contact`, `/experience`, `/certificates`, `/mentorship`, `/stats`, and `/socials` use `/og/{page}`
 - Each project page uses `/og/projects/{slug}`
 
 **Where to edit the copy:**
 
 - Homepage: `src/lib/og/home.ts`
 - Projects index: `src/lib/og/projects-index.ts`
-- Contact, experience, certificates, mentorship, and stats: `src/lib/og/pages.ts`
+- Contact, experience, certificates, mentorship, stats, and socials: `src/lib/og/pages.ts`
 - Individual projects: `src/lib/constants/side-projects.ts`. Set `tags` for the stack, and `og` when the card title, description, or accent should differ from the listing. Ask Shivam is the extra entry in `src/lib/og/projects.ts`.
 
 The portrait is `public/headshot.png`. Fonts live in `src/assets/fonts/`. Shared types are in `src/types/og.types.ts`.

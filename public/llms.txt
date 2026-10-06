@@ -12,6 +12,26 @@ Welcome to the portfolio of Shivam Taneja, a software developer building dynamic
 - [Mentorship](https://www.shivamtaneja.com/mentorship)
 - [Stats](https://www.shivamtaneja.com/stats)
 - [Contact](https://www.shivamtaneja.com/contact)
+- [Socials](https://www.shivamtaneja.com/socials)
+
+## Social Profiles
+Canonical hub for every profile: [Socials](https://www.shivamtaneja.com/socials).
+
+Primary profiles:
+- [LinkedIn](https://www.linkedin.com/in/shivam-taneja/)
+- [GitHub](https://github.com/shivam-taneja)
+- [Twitter / X](https://twitter.com/codesbyshivam)
+- [YouTube](https://www.youtube.com/@codesbyshivam)
+- [Instagram](https://www.instagram.com/codesbyshivam/)
+- [Threads](https://www.threads.net/@codesbyshivam)
+- [Bluesky](https://bsky.app/profile/codesbyshivam.com)
+- [Discord](https://discord.com/users/378431901880549376) (username: .drunkenengineer)
+- [Product Hunt](https://www.producthunt.com/@shivamtaneja)
+- [npm](https://www.npmjs.com/~shivamtaneja)
+- [DEV](https://dev.to/shivamtaneja)
+- [Medium](https://medium.com/@codesbyshivam)
+- [LeetCode](https://leetcode.com/shivam-taneja/)
+- [Hugging Face](https://huggingface.co/shivamtaneja)
 
 ## Public Stats
 The stats page shows privacy-safe aggregate website activity only, such as monthly visits, project activity, traffic source buckets, and daily activity totals.
@@ -39,4 +59,4 @@ Here is a complete list of my featured projects along with direct links to their
 - **Do You Play Badminton**: [https://www.shivamtaneja.com/projects/doyouplaybadminton](https://www.shivamtaneja.com/projects/doyouplaybadminton)
 
 ## Contact Information
-If you are looking to connect, collaborate, or inquire about mentorship, please reach out via the [Contact Page](https://www.shivamtaneja.com/contact).
+If you are looking to connect, collaborate, or inquire about mentorship, please reach out via the [Contact Page](https://www.shivamtaneja.com/contact) or find every profile on [Socials](https://www.shivamtaneja.com/socials).
