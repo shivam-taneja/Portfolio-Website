@@ -8,6 +8,13 @@ export const pageOgCards = {
     tags: ["Email", "Projects", "Ideas"],
     titleSize: 76,
   },
+  socials: {
+    path: "~/socials",
+    title: "Socials",
+    description: "every profile in one place — follow, subscribe, say hi.",
+    tags: ["LinkedIn", "GitHub", "YouTube", "Bluesky", "Threads"],
+    titleSize: 76,
+  },
   experience: {
     path: "~/experience",
     title: "Experience",
@@ -40,9 +47,15 @@ export const pageOgCards = {
 
 export type PageOgKey = keyof typeof pageOgCards;
 
+const pageOgAliases: Record<string, PageOgKey> = {
+  social: "socials",
+};
+
 export function getPageOg(page: string): OgCardContent | undefined {
-  if (page in pageOgCards) {
-    return pageOgCards[page as PageOgKey];
+  const key = pageOgAliases[page] ?? page;
+
+  if (key in pageOgCards) {
+    return pageOgCards[key as PageOgKey];
   }
 
   return undefined;

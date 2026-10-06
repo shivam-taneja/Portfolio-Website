@@ -8,7 +8,14 @@ import TrackedLink from "@/components/tracked-link";
 import Wrapper from "@/components/wrapper";
 import GithubSponsor from "@/components/github-sponsor";
 import { analyticsEvents } from "@/lib/analytics";
-import { Calendar, Coffee, FileText, MailIcon, MapPin } from "lucide-react";
+import {
+  Calendar,
+  Coffee,
+  FileText,
+  MailIcon,
+  MapPin,
+  Share2,
+} from "lucide-react";
 
 export const metadata: Metadata = {
   ...defaultMetadata,
@@ -115,6 +122,24 @@ const ContactPage = () => {
               />
               <p className="dark:text-white text-zinc-900 relative overflow-hidden">
                 <span className="hover-animation">Schedule a Call</span>
+              </p>
+            </TrackedLink>
+
+            <TrackedLink
+              href="/socials"
+              className="flex md:justify-start justify-center w-full items-center gap-3 dark:text-muted-foreground text-neutral-600"
+              analyticsEvent={analyticsEvents.outboundLinkClicked}
+              analyticsProperties={{
+                source: "contact_page",
+                destination: "socials",
+              }}
+            >
+              <Share2
+                className="h-5 w-5 dark:text-white text-zinc-900 shrink-0"
+                aria-hidden="true"
+              />
+              <p className="dark:text-white text-zinc-900 relative overflow-hidden">
+                <span className="hover-animation">Find me elsewhere</span>
               </p>
             </TrackedLink>
 

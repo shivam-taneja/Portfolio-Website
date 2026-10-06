@@ -1,5 +1,7 @@
 import Script from "next/script";
 
+import { socialProfileUrls } from "@/lib/constants/socials";
+
 const StructuredData = () => {
   const structuredData = {
     "@context": "https://schema.org",
@@ -43,10 +45,7 @@ const StructuredData = () => {
         ],
         sameAs: [
           "https://www.shivamtaneja.com",
-          "https://www.linkedin.com/in/shivam-taneja/",
-          "https://github.com/shivam-taneja/",
-          "https://twitter.com/codesbyshivam/",
-          "https://www.youtube.com/@codesbyshivam",
+          ...socialProfileUrls,
           "https://g.co/kgs/3dIQL5SNXiQt2B8HQ",
         ],
       },
@@ -94,10 +93,7 @@ const StructuredData = () => {
           "@type": "ImageObject",
           url: "https://www.shivamtaneja.com/logo.svg",
         },
-        sameAs: [
-          "https://www.linkedin.com/in/shivam-taneja/",
-          "https://github.com/shivam-taneja/",
-        ],
+        sameAs: socialProfileUrls.slice(0, 2),
       },
     ],
   };

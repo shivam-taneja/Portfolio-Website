@@ -6,6 +6,7 @@ export const pathNames = {
     "/certificates": "Certificates",
     "/mentorship": "Mentorship",
     "/stats": "Stats",
+    "/socials": "Socials",
   },
   projects: {
     "chat-mingle": "Project | Chat Mingle",

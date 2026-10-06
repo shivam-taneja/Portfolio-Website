@@ -15,6 +15,12 @@ export default async function sitemaps(): Promise<MetadataRoute.Sitemap> {
       changeFrequency: "yearly",
     },
     {
+      url: "https://www.shivamtaneja.com/socials",
+      lastModified: new Date(),
+      priority: 0.6,
+      changeFrequency: "yearly",
+    },
+    {
       url: "https://www.shivamtaneja.com/experience",
       lastModified: new Date(),
       priority: 0.9,

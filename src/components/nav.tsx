@@ -7,7 +7,7 @@ import { usePathname } from "next/navigation";
 
 import { RESUME_LINK } from "@/lib/constants/about-me";
 import { navItems } from "@/lib/constants/nav-items";
-import { socialItems } from "@/lib/constants/social-items";
+import { navSocials } from "@/lib/constants/socials";
 import { analyticsEvents, captureEvent } from "@/lib/analytics";
 import { cn } from "@/lib/utils";
 
@@ -175,7 +175,7 @@ const Nav = () => {
                           transition={{ delay: navItems.length * 0.05 + 0.1 }}
                           className="flex gap-4 justify-center"
                         >
-                          {socialItems.map((item, idx) => (
+                          {navSocials.map((item) => (
                             <Link
                               href={item.link}
                               target="_blank"
@@ -183,11 +183,11 @@ const Nav = () => {
                               aria-label={item.heading}
                               onClick={() =>
                                 captureEvent(analyticsEvents.socialClicked, {
-                                  platform: item.heading,
+                                  platform: item.id,
                                   source: "mobile_menu",
                                 })
                               }
-                              key={idx}
+                              key={item.id}
                             >
                               <Tooltip delayDuration={50}>
                                 <TooltipTrigger asChild>
@@ -221,7 +221,7 @@ const Nav = () => {
             </>
           ) : (
             <>
-              {socialItems.map((item, idx) => (
+              {navSocials.map((item) => (
                 <Link
                   href={item.link}
                   target="_blank"
@@ -229,11 +229,11 @@ const Nav = () => {
                   aria-label={item.heading}
                   onClick={() =>
                     captureEvent(analyticsEvents.socialClicked, {
-                      platform: item.heading,
+                      platform: item.id,
                       source: "nav",
                     })
                   }
-                  key={idx}
+                  key={item.id}
                 >
                   <Tooltip delayDuration={50}>
                     <TooltipTrigger asChild>
