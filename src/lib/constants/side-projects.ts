@@ -16,6 +16,19 @@ export type SideProject = {
 
 export const sideProjects: SideProject[] = [
   {
+    title: "Moo-ve It",
+    projLink: "https://mooveit.shivamtaneja.com/",
+    desc: "an endless runner starring a balloon cow on four wobbly teats. jump the fences. don't pancake.",
+    descLink: "/projects/mooveit/",
+    userCount: "247 users",
+    activelyWorking: false,
+    tags: ["TanStack Start", "React", "TypeScript", "Canvas"],
+    og: {
+      description:
+        "endless runner: a balloon cow on four teat-legs jumping fences. don't pancake.",
+    },
+  },
+  {
     title: "MyYearOnX",
     projLink: "https://www.myyearonx.com/",
     desc: "spotify wrapped but for X (Twitter) - your year on X, beautifully visualized.",

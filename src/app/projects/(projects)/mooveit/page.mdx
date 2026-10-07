@@ -1,0 +1,95 @@
+import Wrapper from "@/components/wrapper";
+
+import ProjectStructuredData from "@/components/project-structured-data";
+
+<ProjectStructuredData
+  name="Moo-ve It"
+  description="A free browser endless runner starring a balloon cow on four wobbly teats. Jump the fences, don't pancake."
+  url="https://www.shivamtaneja.com/projects/mooveit"
+  tech={[
+    "TanStack Start",
+    "React",
+    "TypeScript",
+    "Tailwind CSS",
+    "HTML5 Canvas",
+  ]}
+/>
+
+export const metadata = {
+  title: "Moo-ve It",
+  description:
+    "Moo-ve It is a free browser endless runner starring a balloon cow sprinting on four pink teats. Jump the fences, survive slow-moo milestones, and try not to pancake. Desktop only.",
+  keywords: [
+    "moo-ve it",
+    "mooveit",
+    "cow game",
+    "endless runner",
+    "browser game",
+    "arcade game",
+    "canvas game",
+    "web game",
+    "balloon cow",
+  ],
+  openGraph: {
+    type: "website",
+    url: "https://www.shivamtaneja.com/projects/mooveit",
+    images: [
+      {
+        url: "/og/projects/mooveit",
+        alt: "Moo-ve It | Shivam Taneja",
+        width: 1200,
+        height: 630,
+      },
+    ],
+  },
+  twitter: {
+    card: "summary_large_image",
+    images: ["/og/projects/mooveit"],
+  },
+  alternates: {
+    canonical: "https://www.shivamtaneja.com/projects/mooveit",
+  },
+};
+
+<Wrapper>
+  <article className="flex flex-col gap-6">
+
+    # Moo-ve It
+
+    - [View live project](https://mooveit.shivamtaneja.com/)
+
+    <SubSection title="About The Project">
+      Moo-ve It is an absurd endless runner. You play as a balloon cow running on four pink teats, jumping wooden fences before gravity turns you into a pancake.
+
+      The original inspiration was [this post on X](https://x.com/AIMind_Ai/status/2107435499686154557) — a balloon cow on teat-legs that was too ridiculous not to turn into a game.
+
+      The game runs entirely in the browser on a canvas. Score climbs as the pasture scrolls faster, slow-moo kicks in at milestones, and a high score sticks in local storage. Day and night themes swap the sky while the cow keeps looking at your cursor.
+
+      Desktop only — it needs at least a 960px-wide window. Phones get a polite “bigger pasture” message instead.
+    </SubSection>
+
+    <SubSection title="Features">
+      - **Endless runner**: Jump fences with Space, ↑, or tap. Speed ramps up as you go.
+      - **Slow moo**: Milestone hits freeze the moment with a slow-moo flash.
+      - **Death theater**: Random pancake / curdle / dairy-disaster lines when you splat.
+      - **Look-at-you cow**: Eyes track the cursor; death gets a cute “looks at you” expression.
+      - **Day / night pasture**: Theme toggle between sunny field and midnight moo.
+      - **Local high score**: Best run saved in the browser.
+      - **Desktop gate**: Blocks mobile and undersized windows with a clear minimum width.
+    </SubSection>
+
+    <SubSection title="Technologies Used">
+      - [TanStack Start](https://tanstack.com/start) + React + TypeScript
+      - [Tailwind CSS](https://tailwindcss.com)
+      - HTML5 Canvas for gameplay
+      - Hosted on [Vercel](https://vercel.com)
+    </SubSection>
+
+    <SubSection title="How to Play">
+      - Open it on a PC, laptop, or wide tablet (960px+).
+      - Press Space or ↑ (or tap the canvas) to start and jump.
+      - Clear the fences. Don't pancake.
+    </SubSection>
+
+  </article>
+</Wrapper>
