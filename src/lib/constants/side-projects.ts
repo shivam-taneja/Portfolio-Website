@@ -16,6 +16,20 @@ export type SideProject = {
 
 export const sideProjects: SideProject[] = [
   {
+    title: "Friction Fixer",
+    projLink: "https://friction-fixer.shivamtaneja.com/",
+    desc: "an AI agent that finds what's driving visitors away, ships a fix, and keeps it only if bounce rate drops.",
+    descLink: "/projects/friction-fixer/",
+    userCount: "293 users",
+    activelyWorking: true,
+    tags: ["Next.js", "Python", "PostHog", "GitHub"],
+    og: {
+      description:
+        "an AI agent that finds what's driving visitors away, ships a fix, and keeps it only if it works.",
+      accent: "#a3e635",
+    },
+  },
+  {
     title: "Moo-ve It",
     projLink: "https://mooveit.shivamtaneja.com/",
     desc: "an endless runner starring a balloon cow on four wobbly teats. jump the fences. don't pancake.",
@@ -56,7 +70,7 @@ export const sideProjects: SideProject[] = [
     desc: "write a post on X or Threads and it lands on the other. no copy-paste.",
     descLink: "/projects/yeet/",
     userCount: "4 users",
-    activelyWorking: true,
+    activelyWorking: false,
     tags: ["WXT", "React", "TypeScript", "Tailwind CSS"],
   },
   {
@@ -74,7 +88,7 @@ export const sideProjects: SideProject[] = [
     desc: "someone asks if you play. you send the card. plus mini games.",
     descLink: "/projects/doyouplaybadminton/",
     userCount: "13 users",
-    activelyWorking: true,
+    activelyWorking: false,
     tags: ["Next.js", "React", "TypeScript", "Tailwind CSS", "Firebase"],
   },
   {

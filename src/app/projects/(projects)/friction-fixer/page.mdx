@@ -1,0 +1,98 @@
+import Wrapper from "@/components/wrapper";
+
+import ProjectStructuredData from "@/components/project-structured-data";
+
+<ProjectStructuredData
+  name="Friction Fixer"
+  description="An AI agent that reads how visitors behave, changes the website through GitHub, and keeps the change only when bounce rate falls."
+  url="https://www.shivamtaneja.com/projects/friction-fixer"
+  repo="https://github.com/shivam-taneja/friction-fixer"
+  tech={["Next.js", "TypeScript", "Python", "PostHog"]}
+/>
+
+export const metadata = {
+  title: "Friction Fixer",
+  description:
+    "Friction Fixer is an AI agent that finds what drives visitors away, changes the website through GitHub, and keeps only the changes that actually work.",
+  keywords: [
+    "friction fixer",
+    "ai website agent",
+    "bounce rate",
+    "website optimization",
+    "posthog",
+    "github pull request",
+    "conversion",
+    "autonomous website fixes",
+  ],
+  openGraph: {
+    type: "website",
+    url: "https://www.shivamtaneja.com/projects/friction-fixer",
+    images: [
+      {
+        url: "/og/projects/friction-fixer",
+        alt: "Friction Fixer | Shivam Taneja",
+        width: 1200,
+        height: 630,
+      },
+    ],
+  },
+  twitter: {
+    card: "summary_large_image",
+    images: ["/og/projects/friction-fixer"],
+  },
+  alternates: {
+    canonical: "https://www.shivamtaneja.com/projects/friction-fixer",
+  },
+};
+
+<Wrapper>
+  <article className="flex flex-col gap-6">
+
+    # Friction Fixer
+
+    - [View live project](https://friction-fixer.shivamtaneja.com/)
+    - [View on GitHub](https://github.com/shivam-taneja/friction-fixer)
+
+    <SubSection title="About The Project">
+      Friction Fixer is an AI agent that works on a website by itself. It looks at how visitors behave, changes the page to fix what is driving them away, then checks whether the change helped. If it did not, the agent undoes the change and the next run can try something else.
+
+      Someone still starts each run. The agent does not loop forever on its own.
+    </SubSection>
+
+    <SubSection title="How It Works">
+      - **Analyst** reads the visitor numbers, past verdicts, and the files it asks for, then writes one plan.
+      - **Builder** edits the project's source, commits, and opens a pull request with the GitHub App. The pull request is merged. If it conflicts, the run waits until you resolve it on GitHub and press Continue.
+      - **Reviewer** compares before and after. Bounce rate has to fall by at least 5 percentage points to keep the change. Otherwise a second pull request undoes it and is merged too.
+
+      Live numbers come from the PostHog project for the same site the repository deploys. The check wait is set in Settings, from 1 hour up to 14 days, and defaults to 7 days.
+    </SubSection>
+
+    <SubSection title="Technologies Used">
+      ### Website:
+      - Next.js
+      - TypeScript
+      - Tailwind CSS
+
+      <br />
+
+      ### Agent:
+      - Python
+
+      <br />
+
+      ### Connected services:
+      - PostHog
+      - GitHub App
+      - Firebase
+    </SubSection>
+
+    <SubSection title="Features">
+      - **One change at a time**: Each run ships a single plan, not a pile of edits
+      - **GitHub pull requests**: The site changes through a pull request you can read
+      - **Measured, then kept or undone**: Bounce rate decides. Scroll, time on page, and pageviews are recorded and do not decide
+      - **Same site, same numbers**: PostHog and the repository have to be the site that is actually deployed
+      - **Your wait**: The check window is yours, from 1 hour to 14 days
+    </SubSection>
+
+  </article>
+</Wrapper>

@@ -29,6 +29,7 @@ export const pathNames = {
     yeet: "Project | Yeet",
     doyouplaybadminton: "Project | Do You Play Badminton",
     mooveit: "Project | Moo-ve It",
+    "friction-fixer": "Project | Friction Fixer",
   },
 };
 
