@@ -50,4 +50,9 @@ export const mentorships: Mentorship[] = [
     role: "Mentor",
     link: "https://www.linkedin.com/posts/shivam-taneja_hackarena-bangalore-igniteroom-ugcPost-7472349333649178624-y998",
   },
+  {
+    title: "Ignite with Bangalore",
+    role: "Mentor",
+    link: "https://www.linkedin.com/posts/shivam-taneja_ignitewithbangalore-igniteroom-hackathon-ugcPost-7517523955935604737-jWm0",
+  },
 ];
