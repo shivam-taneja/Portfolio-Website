@@ -30,6 +30,7 @@ Primary profiles:
 - [npm](https://www.npmjs.com/~shivamtaneja)
 - [DEV](https://dev.to/shivamtaneja)
 - [Medium](https://medium.com/@codesbyshivam)
+- [Substack](https://substack.com/@codesbyshivam)
 - [LeetCode](https://leetcode.com/shivam-taneja/)
 - [Hugging Face](https://huggingface.co/shivamtaneja)
 

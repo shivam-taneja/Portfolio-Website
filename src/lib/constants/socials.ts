@@ -27,6 +27,7 @@ import {
   SiLeetcode,
   SiMedium,
   SiNpm,
+  SiSubstack,
   SiProducthunt,
   SiRoadmapdotsh,
   SiThreads,
@@ -207,6 +208,14 @@ export const socials: Social[] = [
     icon: SiMedium,
     showInNav: false,
     description: "Long-form writing.",
+  },
+  {
+    id: "substack",
+    heading: "Substack",
+    link: "https://substack.com/@codesbyshivam",
+    icon: SiSubstack,
+    showInNav: false,
+    description: "Newsletter and essays.",
   },
   {
     id: "gdev",
