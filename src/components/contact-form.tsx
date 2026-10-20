@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
@@ -12,6 +12,8 @@ import useRecaptcha from "@/hooks/use-recaptcha";
 import { sendEmail } from "@/app/actions/send-mail";
 
 import { analyticsEvents, captureEvent } from "@/lib/analytics";
+import type { ContactPreset } from "@/lib/constants/contact-presets";
+import { cn } from "@/lib/utils";
 
 import { contactFormSchema, ContactFormSchema } from "@/schema/contact";
 
@@ -28,22 +30,47 @@ import {
 import { Input } from "./ui/input";
 import { Textarea } from "./ui/textarea";
 
-const ContactForm = () => {
+type ContactFormProps = {
+  source?: string;
+  preset?: ContactPreset;
+};
+
+const prefilledFieldClass =
+  "border-emerald-400/70 bg-emerald-50 dark:border-emerald-500/50 dark:bg-emerald-950/40";
+
+const ContactForm = ({ source, preset }: ContactFormProps) => {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [hasStarted, setHasStarted] = useState(false);
 
   const { executeRecaptcha } = useRecaptcha();
 
+  const defaultValues: ContactFormSchema = {
+    email: "",
+    name: "",
+    subject: preset?.subject ?? "",
+    message: preset?.message ?? "",
+  };
+
   const form = useForm<ContactFormSchema>({
     resolver: zodResolver(contactFormSchema),
-    defaultValues: {
-      email: "",
-      message: "",
-      name: "",
-      subject: "",
-    },
+    defaultValues,
     mode: "all",
   });
+
+  const { dirtyFields } = form.formState;
+  const subjectIsPrefilled = !!preset && !dirtyFields.subject;
+  const messageIsPrefilled = !!preset && !dirtyFields.message;
+
+  const analyticsProps = source ? { source } : undefined;
+
+  useEffect(() => {
+    if (!preset) return;
+
+    toast.info(`Prefilled from ${preset.label} — add your details or edit as you like.`, {
+      toastId: `contact-prefill-${source ?? "preset"}`,
+      autoClose: 5000,
+    });
+  }, [preset, source]);
 
   async function onSubmit(values: ContactFormSchema) {
     setIsSubmitting(true);
@@ -62,6 +89,7 @@ const ContactForm = () => {
             captureEvent(analyticsEvents.contactFormSubmitted, {
               subject_length: values.subject.length,
               message_length: values.message.length,
+              ...analyticsProps,
             });
 
             return result;
@@ -71,7 +99,7 @@ const ContactForm = () => {
             success: {
               render() {
                 setTimeout(() => {
-                  form.reset();
+                  form.reset(defaultValues);
 
                   window.scrollTo({
                     top: 0,
@@ -86,6 +114,7 @@ const ContactForm = () => {
               render({ data }: { data: Error }) {
                 captureEvent(analyticsEvents.contactFormFailed, {
                   reason: data.message || "unknown",
+                  ...analyticsProps,
                 });
 
                 const errMsg =
@@ -101,6 +130,7 @@ const ContactForm = () => {
       console.error("Error submitting form:", error);
       captureEvent(analyticsEvents.contactFormFailed, {
         reason: error instanceof Error ? error.message : "unknown",
+        ...analyticsProps,
       });
     } finally {
       setIsSubmitting(false);
@@ -111,7 +141,7 @@ const ContactForm = () => {
     if (hasStarted) return;
 
     setHasStarted(true);
-    captureEvent(analyticsEvents.contactFormStarted);
+    captureEvent(analyticsEvents.contactFormStarted, analyticsProps);
   }
 
   return (
@@ -166,12 +196,18 @@ const ContactForm = () => {
             <FormItem>
               <FormLabel className="dark:text-white text-zinc-900">
                 Subject *
+                {subjectIsPrefilled && (
+                  <span className="ml-2 text-xs font-normal text-emerald-700 dark:text-emerald-400">
+                    prefilled
+                  </span>
+                )}
               </FormLabel>
               <FormControl>
                 <Input
                   placeholder="Project Discussion"
                   {...field}
                   disabled={isSubmitting}
+                  className={cn(subjectIsPrefilled && prefilledFieldClass)}
                 />
               </FormControl>
               <FormMessage />
@@ -185,11 +221,19 @@ const ContactForm = () => {
             <FormItem>
               <FormLabel className="dark:text-white text-zinc-900">
                 Message *
+                {messageIsPrefilled && (
+                  <span className="ml-2 text-xs font-normal text-emerald-700 dark:text-emerald-400">
+                    prefilled
+                  </span>
+                )}
               </FormLabel>
               <FormControl>
                 <Textarea
                   placeholder="Tell me more about your project..."
-                  className="min-h-[150px]"
+                  className={cn(
+                    "min-h-[150px]",
+                    messageIsPrefilled && prefilledFieldClass,
+                  )}
                   {...field}
                   disabled={isSubmitting}
                 />

@@ -1,6 +1,10 @@
 import { Metadata } from "next";
 
 import { RESUME_LINK } from "@/lib/constants/about-me";
+import {
+  getContactPreset,
+  isContactSource,
+} from "@/lib/constants/contact-presets";
 import { defaultMetadata } from "@/lib/constants/metadata";
 
 import ContactForm from "@/components/contact-form";
@@ -16,6 +20,17 @@ import {
   MapPin,
   Share2,
 } from "lucide-react";
+
+type ContactPageProps = {
+  searchParams: Promise<{ source?: string | string[] }>;
+};
+
+function resolveSource(
+  value: string | string[] | undefined,
+): string | undefined {
+  const raw = Array.isArray(value) ? value[0] : value;
+  return isContactSource(raw) ? raw : undefined;
+}
 
 export const metadata: Metadata = {
   ...defaultMetadata,
@@ -49,7 +64,11 @@ export const metadata: Metadata = {
   },
 };
 
-const ContactPage = () => {
+const ContactPage = async ({ searchParams }: ContactPageProps) => {
+  const params = await searchParams;
+  const source = resolveSource(params.source);
+  const preset = getContactPreset(source);
+
   return (
     <Wrapper>
       <section className="grid md:grid-cols-2 md:gap-0 gap-10 w-full">
@@ -164,7 +183,7 @@ const ContactPage = () => {
           </div>
         </div>
 
-        <ContactForm />
+        <ContactForm source={source} preset={preset} />
       </section>
     </Wrapper>
   );
