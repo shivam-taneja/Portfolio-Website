@@ -4,7 +4,7 @@ import ProjectStructuredData from "@/components/project-structured-data";
 
 <ProjectStructuredData
   name="Yeet"
-  description="A Chrome extension that carries posts between X and Threads. Write in one place and it lands in the other, using the session you are already logged into. Nothing is saved."
+  description="A free, open-source browser extension that auto cross-posts text and images between X and Threads in both directions. Write once — it posts by itself."
   url="https://www.shivamtaneja.com/projects/yeet"
   repo="https://github.com/shivam-taneja/yeet"
   tech={["WXT", "React", "TypeScript", "Tailwind CSS"]}
@@ -13,13 +13,16 @@ import ProjectStructuredData from "@/components/project-structured-data";
 export const metadata = {
   title: "Yeet",
   description:
-    "Yeet is a free, open-source Chrome extension that cross-posts between X and Threads. Write once and it lands on the other platform. No copy-paste, no stored posts, no passwords.",
+    "Yeet is a free, open-source browser extension that auto cross-posts text and images between X and Threads. Write once and it lands on the other platform — no copy-paste, no passwords.",
   keywords: [
     "yeet",
     "x to threads",
     "threads to x",
     "cross post",
+    "cross post images",
     "chrome extension",
+    "edge extension",
+    "firefox extension",
     "twitter threads sync",
   ],
   openGraph: {
@@ -50,18 +53,21 @@ export const metadata = {
 
     - [View live project](https://yeet.shivamtaneja.com/)
     - [View on GitHub](https://github.com/shivam-taneja/yeet)
-    - [Get it on the Chrome Web Store](https://chromewebstore.google.com/detail/knbfidiiikhjebpijhafdikkjhbgbefe)
+    - [Chrome Web Store](https://chromewebstore.google.com/detail/knbfidiiikhjebpijhafdikkjhbgbefe)
+    - [Edge Add-ons](https://microsoftedge.microsoft.com/addons/detail/yeet/iaiackoabgikdcniiclhbflcnjfhnand)
+    - [Firefox Add-ons](https://addons.mozilla.org/en-US/firefox/addon/get-yeet/)
 
     <SubSection title="About The Project">
-      Yeet carries your posts between X and Threads automatically. Type it in one place, and it lands in the other — same moment, no copy-paste.
+      Yeet auto cross-posts between X and Threads. Write on X, it posts to Threads by itself. Write on Threads, it lands on X. Text and images included. Free and open source.
 
-      It is a Chrome extension that runs in the browser. When you compose a post on X or Threads, it captures the text and submits it to the other platform in the background, using the session you are already logged into. There is no database. Nothing about the post is saved.
+      It runs in the browser as an extension for Chrome, Edge, and Firefox. When you post on X or Threads, Yeet captures the text (and images, if Copy Images is on), opens a background tab on the other platform, fills the composer, and posts using the session you are already logged into. There is no Yeet server and no database — nothing about the post is uploaded to us.
     </SubSection>
 
     <SubSection title="How It Works">
       - Post on X, and it lands on Threads. Post on Threads, and it lands on X.
+      - Enable Copy Images in Settings and photos hop over too (up to four on X). Videos and GIFs are not copied yet.
       - Yeet uses the accounts you are already logged into. It never asks for passwords or stores login tokens.
-      - You can pause a direction and see what landed without leaving the page you are on.
+      - You can pause Yeet and check the last yeet without leaving the page you are on.
     </SubSection>
 
     <SubSection title="Technologies Used">
@@ -80,9 +86,12 @@ export const metadata = {
 
     <SubSection title="Features">
       - **Two-way by default**: X to Threads and Threads to X
+      - **Text and images**: Copy Images in Settings carries photos both ways
+      - **Posts by itself**: Background tab fills the other composer and posts
       - **Write once**: The same words land on both timelines
       - **No copy-paste**: No re-typing and no second post to remember
-      - **Runs locally**: No server, no stored posts
+      - **Runs locally**: No server, no stored posts on our side
+      - **Chrome, Edge, and Firefox**
       - **Free and open source**
     </SubSection>
 

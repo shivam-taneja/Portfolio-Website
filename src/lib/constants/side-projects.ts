@@ -98,7 +98,7 @@ export const sideProjects: SideProject[] = [
   {
     title: "Yeet",
     projLink: "https://yeet.shivamtaneja.com/",
-    desc: "write a post on X or Threads and it lands on the other. no copy-paste.",
+    desc: "auto cross-post text and images between X and Threads. write once, it posts by itself.",
     descLink: "/projects/yeet/",
     userCount: "4 users",
     status: "spotlight",
