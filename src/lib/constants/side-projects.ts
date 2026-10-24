@@ -1,18 +1,49 @@
 import type { ProjectOgOverride } from "@/types/og.types";
 
+export const projectStatuses = [
+  "spotlight",
+  "active",
+  "shipped",
+  "archive",
+] as const;
+
+export type ProjectStatus = (typeof projectStatuses)[number];
+
+const statusRank: Record<ProjectStatus, number> = {
+  spotlight: 0,
+  active: 1,
+  shipped: 2,
+  archive: 3,
+};
+
 export type SideProject = {
   title: string;
   projLink: string;
   desc: string;
   descLink: string;
   userCount: string | null;
-  activelyWorking: boolean;
+  /** Listing order tier. UI stays a flat list; this is for sort only. */
+  status: ProjectStatus;
 
   /** Short stack shown on the social card. */
   tags: string[];
   /** Card copy when it should differ from the listing title or description. */
   og?: ProjectOgOverride;
 };
+
+function userCountValue(value: string | null) {
+  return Number(value?.match(/\d+/)?.[0] ?? 0);
+}
+
+/** Chatbot is rendered separately as #1. Sort the rest by status, then users. */
+export function sortSideProjects(projects: SideProject[]) {
+  return [...projects].sort((a, b) => {
+    const byStatus = statusRank[a.status] - statusRank[b.status];
+    if (byStatus !== 0) return byStatus;
+
+    return userCountValue(b.userCount) - userCountValue(a.userCount);
+  });
+}
 
 export const sideProjects: SideProject[] = [
   {
@@ -21,7 +52,7 @@ export const sideProjects: SideProject[] = [
     desc: "an AI agent that finds what's driving visitors away, ships a fix, and keeps it only if bounce rate drops.",
     descLink: "/projects/friction-fixer/",
     userCount: "293 users",
-    activelyWorking: true,
+    status: "spotlight",
     tags: ["Next.js", "Python", "PostHog", "GitHub"],
     og: {
       description:
@@ -35,7 +66,7 @@ export const sideProjects: SideProject[] = [
     desc: "an endless runner starring a balloon cow on four wobbly teats. jump the fences. don't pancake.",
     descLink: "/projects/mooveit/",
     userCount: "247 users",
-    activelyWorking: false,
+    status: "shipped",
     tags: ["TanStack Start", "React", "TypeScript", "Canvas"],
     og: {
       description:
@@ -48,7 +79,7 @@ export const sideProjects: SideProject[] = [
     desc: "spotify wrapped but for X (Twitter) - your year on X, beautifully visualized.",
     descLink: "/projects/myyearonx/",
     userCount: null,
-    activelyWorking: true,
+    status: "spotlight",
     tags: ["Next.js", "TypeScript", "Twitter/X API", "PostgreSQL"],
     og: {
       description:
@@ -61,7 +92,7 @@ export const sideProjects: SideProject[] = [
     desc: "look away and get the iPhone Duo-style fade. webcam-based, fully on-device.",
     descLink: "/projects/farside/",
     userCount: null,
-    activelyWorking: false,
+    status: "shipped",
     tags: ["Tauri", "Rust", "TypeScript", "MediaPipe"],
   },
   {
@@ -70,7 +101,7 @@ export const sideProjects: SideProject[] = [
     desc: "write a post on X or Threads and it lands on the other. no copy-paste.",
     descLink: "/projects/yeet/",
     userCount: "4 users",
-    activelyWorking: false,
+    status: "spotlight",
     tags: ["WXT", "React", "TypeScript", "Tailwind CSS"],
   },
   {
@@ -79,7 +110,7 @@ export const sideProjects: SideProject[] = [
     desc: "a desi turn-based life simulator where every day throws a new, hilariously relatable situation at you.",
     descLink: "/projects/bhondu-game/",
     userCount: "170 users",
-    activelyWorking: false,
+    status: "shipped",
     tags: ["React Native", "Next.js", "NestJS", "Firebase"],
   },
   {
@@ -88,7 +119,7 @@ export const sideProjects: SideProject[] = [
     desc: "someone asks if you play. you send the card. plus mini games.",
     descLink: "/projects/doyouplaybadminton/",
     userCount: "13 users",
-    activelyWorking: false,
+    status: "shipped",
     tags: ["Next.js", "React", "TypeScript", "Tailwind CSS", "Firebase"],
   },
   {
@@ -97,7 +128,7 @@ export const sideProjects: SideProject[] = [
     desc: "a growing, crowdsourced database of useful-but-forgettable tools and links, with a touch of desi humor.",
     descLink: "/projects/exactlywhatihavebeenlookingfor/",
     userCount: null,
-    activelyWorking: false,
+    status: "shipped",
     tags: ["Next.js"],
     og: {
       description:
@@ -110,7 +141,7 @@ export const sideProjects: SideProject[] = [
     desc: "my another profile/portfolio i got just cause for funziess xD so it has details about me and its like a fun random domain i bought.",
     descLink: "/projects/theguyshetoldyouabout/",
     userCount: null,
-    activelyWorking: false,
+    status: "shipped",
     tags: ["Next.js"],
     og: {
       description:
@@ -123,7 +154,7 @@ export const sideProjects: SideProject[] = [
     desc: "a personal AI memory layer that knows who you are, so every AI tool you use stops starting from zero.",
     descLink: "/projects/graphmyself/",
     userCount: "5 users",
-    activelyWorking: false,
+    status: "shipped",
     tags: ["NestJS", "Next.js", "PostgreSQL", "pgvector"],
     og: {
       description:
@@ -136,7 +167,7 @@ export const sideProjects: SideProject[] = [
     desc: "a personalized learning roadmap that tracks your growth across platforms and tells you exactly what to learn next.",
     descLink: "/projects/myskill-road/",
     userCount: null,
-    activelyWorking: false,
+    status: "shipped",
     tags: ["Next.js", "React", "Prisma", "PostgreSQL"],
     og: {
       description:
@@ -149,7 +180,7 @@ export const sideProjects: SideProject[] = [
     desc: "a developer friendly SDK for sending multi-channel notifications like email, SMS, WhatsApp, push and more built for reliability at scale.",
     descLink: "/projects/eznotify/",
     userCount: null,
-    activelyWorking: false,
+    status: "shipped",
     tags: ["Next.js", "TypeScript", "Notification APIs"],
     og: {
       description:
@@ -162,7 +193,7 @@ export const sideProjects: SideProject[] = [
     desc: "an AI powered SaaS that turns any code into clear explanations, flowcharts and summaries.",
     descLink: "/projects/decode-mycode/",
     userCount: "5 users",
-    activelyWorking: false,
+    status: "shipped",
     tags: ["AI", "Code Analysis", "Developer Tools", "SaaS"],
     og: {
       description:
@@ -175,7 +206,7 @@ export const sideProjects: SideProject[] = [
     desc: "an open source, real-time collaborative knowledge-sharing platform.",
     descLink: "/projects/collab-write/",
     userCount: "10 users",
-    activelyWorking: false,
+    status: "shipped",
     tags: ["Next.js", "React", "Appwrite", "Tiptap"],
   },
   {
@@ -184,7 +215,7 @@ export const sideProjects: SideProject[] = [
     desc: "an AI-powered system that understands the world around it.",
     descLink: "/projects/nagar-iq/",
     userCount: "12 users",
-    activelyWorking: false,
+    status: "shipped",
     tags: ["React Native", "Appwrite", "Data Visualization"],
     og: {
       description: "a gamified, real-time city data and quiz platform.",
@@ -196,7 +227,7 @@ export const sideProjects: SideProject[] = [
     desc: "an AI-powered gaming roast generator for witty, non-toxic comebacks.",
     descLink: "/projects/tilt-bot/",
     userCount: "05 users",
-    activelyWorking: false,
+    status: "shipped",
     tags: ["Next.js", "React", "NestJS", "Groq AI"],
   },
   {
@@ -205,7 +236,7 @@ export const sideProjects: SideProject[] = [
     desc: "a fun, experimental chat app.",
     descLink: "/projects/chat-mingle/",
     userCount: "19 users",
-    activelyWorking: false,
+    status: "shipped",
     tags: ["React", "Firebase", "SASS", "Vite"],
     og: {
       description: "a fun, experimental real-time chat app.",
@@ -217,7 +248,7 @@ export const sideProjects: SideProject[] = [
     desc: "a game where you grow by eating smaller circles while avoiding larger ones.",
     descLink: "/projects/circle-catcher/",
     userCount: "09 users",
-    activelyWorking: false,
+    status: "shipped",
     tags: ["JavaScript", "HTML5 Canvas", "CSS"],
   },
   {
@@ -226,7 +257,7 @@ export const sideProjects: SideProject[] = [
     desc: "a web app with assessments to provide personalized career recommendations, empowering student decisions.",
     descLink: "/projects/career-guidance/",
     userCount: null,
-    activelyWorking: false,
+    status: "shipped",
     tags: ["Next.js", "React", "TypeScript", "Node.js"],
     og: {
       name: "Career Guide Hub",

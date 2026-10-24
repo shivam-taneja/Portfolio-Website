@@ -1,6 +1,9 @@
 import React from "react";
 
-import { sideProjects } from "@/lib/constants/side-projects";
+import {
+  sideProjects,
+  sortSideProjects,
+} from "@/lib/constants/side-projects";
 import { analyticsEvents } from "@/lib/analytics";
 
 import ChatBotProject from "./chat-bot-project";
@@ -11,15 +14,7 @@ import { Tooltip, TooltipContent, TooltipTrigger } from "../ui/tooltip";
 import TrackedLink from "../tracked-link";
 
 const SideProjectsSection = () => {
-  const projects = [...sideProjects].sort((a, b) => {
-    const active = Number(b.activelyWorking) - Number(a.activelyWorking);
-    if (active !== 0) return active;
-
-    const count = (value: string | null) =>
-      Number(value?.match(/\d+/)?.[0] ?? 0);
-
-    return count(b.userCount) - count(a.userCount);
-  });
+  const projects = sortSideProjects(sideProjects);
 
   return (
     <section aria-labelledby="projects-heading">
@@ -116,7 +111,7 @@ const SideProjectsSection = () => {
               <div className="flex gap-2 items-center shrink-0">
                 {item.userCount && <p>{item.userCount}</p>}
 
-                {item.activelyWorking && (
+                {item.status === "active" && (
                   <Tooltip delayDuration={50}>
                     <TooltipTrigger asChild>
                       <GoDotFill

@@ -2,7 +2,10 @@ import { Metadata } from "next";
 import Script from "next/script";
 
 import { defaultMetadata } from "@/lib/constants/metadata";
-import { sideProjects } from "@/lib/constants/side-projects";
+import {
+  sideProjects,
+  sortSideProjects,
+} from "@/lib/constants/side-projects";
 
 import ChatBotProject from "@/components/home/chat-bot-project";
 import TrackedLink from "@/components/tracked-link";
@@ -50,15 +53,7 @@ export const metadata: Metadata = {
 };
 
 const ProjectsPage = () => {
-  const projects = [...sideProjects].sort((a, b) => {
-    const active = Number(b.activelyWorking) - Number(a.activelyWorking);
-    if (active !== 0) return active;
-
-    const count = (value: string | null) =>
-      Number(value?.match(/\d+/)?.[0] ?? 0);
-
-    return count(b.userCount) - count(a.userCount);
-  });
+  const projects = sortSideProjects(sideProjects);
 
   const structuredData = {
     "@context": "https://schema.org",
@@ -161,7 +156,7 @@ const ProjectsPage = () => {
                 <div className="flex gap-2 items-center shrink-0">
                   {item.userCount && <p>{item.userCount}</p>}
 
-                  {item.activelyWorking && (
+                  {item.status === "active" && (
                     <Tooltip delayDuration={50}>
                       <TooltipTrigger asChild>
                         <GoDotFill
