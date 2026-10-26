@@ -25,6 +25,7 @@ Primary profiles:
 - [Instagram](https://www.instagram.com/codesbyshivam/)
 - [Threads](https://www.threads.net/@codesbyshivam)
 - [Bluesky](https://bsky.app/profile/codesbyshivam.com)
+- [Reddit](https://www.reddit.com/user/codesbyshivam/)
 - [Discord](https://discord.com/users/378431901880549376) (username: .drunkenengineer)
 - [Product Hunt](https://www.producthunt.com/@shivamtaneja)
 - [npm](https://www.npmjs.com/~shivamtaneja)
