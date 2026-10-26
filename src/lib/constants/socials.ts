@@ -5,6 +5,7 @@ import {
   FaGlobe,
   FaInstagram,
   FaLinkedin,
+  FaReddit,
   FaTwitter,
   FaYoutube,
 } from "react-icons/fa";
@@ -112,6 +113,14 @@ export const socials: Social[] = [
     icon: FaFacebook,
     showInNav: false,
     description: "Updates on Facebook.",
+  },
+  {
+    id: "reddit",
+    heading: "Reddit",
+    link: "https://www.reddit.com/user/codesbyshivam/",
+    icon: FaReddit,
+    showInNav: false,
+    description: "Posts and discussions on Reddit.",
   },
   {
     id: "discord",
