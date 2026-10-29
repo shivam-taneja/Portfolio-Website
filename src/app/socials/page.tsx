@@ -5,9 +5,13 @@ import { ExternalLink } from "lucide-react";
 import { defaultMetadata } from "@/lib/constants/metadata";
 import { socials } from "@/lib/constants/socials";
 import { analyticsEvents } from "@/lib/analytics";
+import { getSocialStats, resolveSocialId } from "@/lib/social-stats";
 
 import Wrapper from "@/components/wrapper";
 import TrackedLink from "@/components/tracked-link";
+import FeaturedSocials from "@/components/featured-socials";
+
+export const revalidate = 3600;
 
 export const metadata: Metadata = {
   ...defaultMetadata,
@@ -41,7 +45,13 @@ export const metadata: Metadata = {
   },
 };
 
-const SocialsPage = () => {
+const SocialsPage = async () => {
+  const stats = await getSocialStats();
+  const featuredIds = new Set(
+    stats.rows.map((row) => resolveSocialId(row.id)),
+  );
+  const moreSocials = socials.filter((s) => !featuredIds.has(s.id));
+
   const structuredData = {
     "@context": "https://schema.org",
     "@type": "CollectionPage",
@@ -72,53 +82,72 @@ const SocialsPage = () => {
       />
 
       <Wrapper>
-        <section className="mx-auto w-full space-y-8 md:text-start text-center">
+        <section className="mx-auto flex w-full flex-col gap-10 text-center md:text-start">
           <div className="space-y-4">
-            <h1 className="text-4xl font-bold dark:text-white text-zinc-900">
+            <h1 className="text-4xl font-bold text-zinc-900 dark:text-white">
               Socials.
             </h1>
-            <p className="dark:text-muted-foreground text-neutral-600">
+            <p className="text-neutral-600 dark:text-muted-foreground">
               Everywhere I show up online — pick a place and say hi.
             </p>
           </div>
 
-          <ul className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 gap-3 list-none p-0 m-0">
-            {socials.map((item) => (
-              <li key={item.id} className="min-w-0">
-                <TrackedLink
-                  href={item.link}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="group flex h-full w-full items-center gap-3 rounded-md border border-zinc-200 dark:border-zinc-800 bg-zinc-50/80 dark:bg-zinc-900/40 px-4 py-3.5 transition-colors hover:bg-zinc-100 dark:hover:bg-zinc-800/60"
-                  analyticsEvent={analyticsEvents.socialClicked}
-                  analyticsProperties={{
-                    platform: item.id,
-                    source: "socials_page",
-                  }}
-                >
-                  <item.icon
-                    size={22}
-                    className="shrink-0 dark:text-white text-zinc-900"
-                    aria-hidden="true"
-                  />
-                  <div className="min-w-0 flex-1 text-left">
-                    <p className="font-medium dark:text-white text-zinc-900">
-                      {item.heading}
-                    </p>
-                    {item.description ? (
-                      <p className="text-sm dark:text-muted-foreground text-neutral-600 truncate">
-                        {item.description}
+          {stats.rows.length > 0 ? (
+            <FeaturedSocials
+              rows={stats.rows}
+              totalFollowers={stats.totalFollowers}
+              lastSyncedAt={stats.lastSyncedAt}
+            />
+          ) : null}
+
+          <section className="flex flex-col gap-4">
+            <div className="flex flex-col gap-1 text-left">
+              <h2 className="text-lg font-semibold text-zinc-900 dark:text-white">
+                Everywhere else
+              </h2>
+              <p className="text-sm text-neutral-600 dark:text-muted-foreground">
+                More profiles, tools, and link-in-bio spots.
+              </p>
+            </div>
+
+            <ul className="m-0 grid list-none grid-cols-1 gap-3 p-0 sm:grid-cols-2 xl:grid-cols-3">
+              {moreSocials.map((item) => (
+                <li key={item.id} className="min-w-0">
+                  <TrackedLink
+                    href={item.link}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="group flex h-full w-full items-center gap-3 rounded-md border border-zinc-200 bg-zinc-50/80 px-4 py-3.5 transition-colors hover:bg-zinc-100 dark:border-zinc-800 dark:bg-zinc-900/40 dark:hover:bg-zinc-800/60"
+                    analyticsEvent={analyticsEvents.socialClicked}
+                    analyticsProperties={{
+                      platform: item.id,
+                      source: "socials_page",
+                    }}
+                  >
+                    <item.icon
+                      size={22}
+                      className="shrink-0 text-zinc-900 dark:text-white"
+                      aria-hidden="true"
+                    />
+                    <div className="min-w-0 flex-1 text-left">
+                      <p className="font-medium text-zinc-900 dark:text-white">
+                        {item.heading}
                       </p>
-                    ) : null}
-                  </div>
-                  <ExternalLink
-                    className="h-4 w-4 shrink-0 text-zinc-400 dark:text-zinc-500 opacity-0 transition-opacity group-hover:opacity-100"
-                    aria-hidden="true"
-                  />
-                </TrackedLink>
-              </li>
-            ))}
-          </ul>
+                      {item.description ? (
+                        <p className="truncate text-sm text-neutral-600 dark:text-muted-foreground">
+                          {item.description}
+                        </p>
+                      ) : null}
+                    </div>
+                    <ExternalLink
+                      className="h-4 w-4 shrink-0 text-zinc-400 opacity-0 transition-opacity group-hover:opacity-100 dark:text-zinc-500"
+                      aria-hidden="true"
+                    />
+                  </TrackedLink>
+                </li>
+              ))}
+            </ul>
+          </section>
         </section>
       </Wrapper>
     </>

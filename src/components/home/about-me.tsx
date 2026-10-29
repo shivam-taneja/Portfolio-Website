@@ -3,7 +3,7 @@ import React from "react";
 import Link from "next/link";
 
 import { aboutMeContent } from "@/lib/constants/about-me";
-import { BarChart3 } from "lucide-react";
+import { BarChart3, Share2 } from "lucide-react";
 
 const AboutMeSection = () => {
   return (
@@ -28,13 +28,22 @@ const AboutMeSection = () => {
           ))}
         </ul>
 
-        <Link
-          href="/stats"
-          className="inline-flex w-fit items-center gap-2 rounded-md border border-border px-3 py-2 text-sm font-medium dark:text-white text-zinc-900 dark:hover:bg-zinc-900 hover:bg-zinc-100 transition-colors"
-        >
-          <BarChart3 className="h-4 w-4" aria-hidden="true" />
-          <span>View site stats</span>
-        </Link>
+        <div className="flex flex-wrap gap-2">
+          <Link
+            href="/stats"
+            className="inline-flex w-fit items-center gap-2 rounded-md border border-border px-3 py-2 text-sm font-medium dark:text-white text-zinc-900 dark:hover:bg-zinc-900 hover:bg-zinc-100 transition-colors"
+          >
+            <BarChart3 className="h-4 w-4" aria-hidden="true" />
+            <span>View site stats</span>
+          </Link>
+          <Link
+            href="/socials"
+            className="inline-flex w-fit items-center gap-2 rounded-md border border-border px-3 py-2 text-sm font-medium dark:text-white text-zinc-900 dark:hover:bg-zinc-900 hover:bg-zinc-100 transition-colors"
+          >
+            <Share2 className="h-4 w-4" aria-hidden="true" />
+            <span>View social stats</span>
+          </Link>
+        </div>
       </div>
     </section>
   );
