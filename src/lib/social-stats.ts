@@ -53,9 +53,9 @@ export function resolveSocialId(statId: string) {
 }
 
 export const trendWindows: { key: TrendWindowKey; label: string }[] = [
-  { key: "change_7d", label: "7d" },
-  { key: "change_1m", label: "1m" },
-  { key: "change_3m", label: "3m" },
+  { key: "change_7d", label: "7 days" },
+  { key: "change_1m", label: "1 month" },
+  { key: "change_3m", label: "3 months" },
 ];
 
 const DAY_MS = 24 * 60 * 60 * 1000;
@@ -315,22 +315,24 @@ function parseSheetCsv(csvText: string): SocialStatsPayload {
   return mapSnapshotsToPayload(snapshots);
 }
 
+const SOCIAL_STATS_CSV_URL =
+  "https://docs.google.com/spreadsheets/d/e/2PACX-1vRdmkCRRZ7U_i7mxZvl5R-pFvQCebJa000IkerBkFhxt2e36QSJWeUJSEkK7vbRsTATTVs3Mbm6Hyj5/pub?gid=1703766040&single=true&output=csv";
+
 export async function getSocialStats(): Promise<SocialStatsPayload> {
-  const csvUrl = process.env.SOCIAL_STATS_CSV_URL?.trim();
-  if (!csvUrl) {
+  try {
+    const res = await fetch(SOCIAL_STATS_CSV_URL, {
+      next: { revalidate: 3600 },
+      headers: { Accept: "text/csv,text/plain,*/*" },
+    });
+
+    if (!res.ok) {
+      throw new Error(`Social stats CSV fetch failed: ${res.status}`);
+    }
+
+    return parseSheetCsv(await res.text());
+  } catch {
     return { rows: [], totalFollowers: null, lastSyncedAt: null };
   }
-
-  const res = await fetch(csvUrl, {
-    next: { revalidate: 3600 },
-    headers: { Accept: "text/csv,text/plain,*/*" },
-  });
-
-  if (!res.ok) {
-    throw new Error(`Social stats CSV fetch failed: ${res.status}`);
-  }
-
-  return parseSheetCsv(await res.text());
 }
 
 export function formatStatNumber(value: number) {
