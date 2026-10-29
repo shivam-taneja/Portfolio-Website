@@ -11,6 +11,7 @@ import {
 } from "lucide-react";
 
 import Wrapper from "@/components/wrapper";
+import AnimatedNumber from "@/components/animated-number";
 import { defaultMetadata } from "@/lib/constants/metadata";
 import { getStats } from "@/lib/stats";
 
@@ -47,13 +48,6 @@ export const metadata: Metadata = {
     images: ["/og/stats"],
   },
 };
-
-const numberFormatter = new Intl.NumberFormat("en", {
-  notation: "compact",
-  maximumFractionDigits: 1,
-});
-
-const fullNumberFormatter = new Intl.NumberFormat("en");
 
 export default async function StatsPage() {
   const stats = await getStats();
@@ -165,8 +159,8 @@ export default async function StatsPage() {
                         {project.project}
                       </p>
                     </div>
-                    <p className="shrink-0 text-sm dark:text-muted-foreground text-neutral-600">
-                      {fullNumberFormatter.format(project.total)}
+                    <p className="shrink-0 text-sm tabular-nums dark:text-muted-foreground text-neutral-600">
+                      <AnimatedNumber value={project.total} format="integer" />
                     </p>
                   </div>
                   <div className="ml-8 h-2 overflow-hidden rounded-sm bg-muted">
@@ -178,8 +172,10 @@ export default async function StatsPage() {
                     />
                   </div>
                   <p className="ml-8 text-xs dark:text-muted-foreground text-neutral-500">
-                    {fullNumberFormatter.format(project.clicks)} clicks /{" "}
-                    {fullNumberFormatter.format(project.views)} views
+                    <AnimatedNumber value={project.clicks} format="integer" />{" "}
+                    clicks /{" "}
+                    <AnimatedNumber value={project.views} format="integer" />{" "}
+                    views
                   </p>
                 </div>
               ))}
@@ -212,8 +208,8 @@ export default async function StatsPage() {
                     }}
                   />
                 </div>
-                <p className="text-right text-sm dark:text-muted-foreground text-neutral-600">
-                  {fullNumberFormatter.format(source.total)}
+                <p className="text-right text-sm tabular-nums dark:text-muted-foreground text-neutral-600">
+                  <AnimatedNumber value={source.total} format="integer" />
                 </p>
               </div>
             ))}
@@ -241,8 +237,8 @@ function MetricTile({
         <p className="text-sm dark:text-muted-foreground text-neutral-600">
           {label}
         </p>
-        <p className="text-3xl font-bold dark:text-white text-zinc-900">
-          {numberFormatter.format(value)}
+        <p className="text-3xl font-bold tabular-nums dark:text-white text-zinc-900">
+          <AnimatedNumber value={value} format="compact" />
         </p>
         <p className="text-xs dark:text-muted-foreground text-neutral-500">
           {helper}
