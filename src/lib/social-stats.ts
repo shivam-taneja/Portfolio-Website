@@ -1,6 +1,15 @@
 export type SocialStatStatus = "active" | "inactive";
 
-export type TrendWindowKey = "change_7d" | "change_1m" | "change_3m";
+export type TrendWindowKey = "now" | "lookback_7d" | "lookback_1m" | "lookback_3m";
+
+export type WindowMetrics = {
+  primary_value: number | null;
+  secondary_label: string | null;
+  secondary_value: number | null;
+  avg_views: number | null;
+  engagement_rate: number | null;
+  as_of: string | null;
+};
 
 export type SocialStatRow = {
   id: string;
@@ -8,17 +17,10 @@ export type SocialStatRow = {
   handle: string;
   url: string;
   primary_label: string;
-  primary_value: number | null;
-  secondary_label: string | null;
-  secondary_value: number | null;
-  change_7d: number | null;
-  change_1m: number | null;
-  change_3m: number | null;
-  avg_views: number | null;
-  engagement_rate: number | null;
   source: string;
   last_synced_at: string | null;
   status: SocialStatStatus;
+  windows: Record<TrendWindowKey, WindowMetrics | null>;
 };
 
 export type SocialStatsPayload = {
@@ -53,16 +55,17 @@ export function resolveSocialId(statId: string) {
 }
 
 export const trendWindows: { key: TrendWindowKey; label: string }[] = [
-  { key: "change_7d", label: "7 days" },
-  { key: "change_1m", label: "1 month" },
-  { key: "change_3m", label: "3 months" },
+  { key: "now", label: "Now" },
+  { key: "lookback_7d", label: "7 days" },
+  { key: "lookback_1m", label: "1 month" },
+  { key: "lookback_3m", label: "3 months" },
 ];
 
 const DAY_MS = 24 * 60 * 60 * 1000;
-const TREND_DAYS: Record<TrendWindowKey, number> = {
-  change_7d: 7,
-  change_1m: 30,
-  change_3m: 90,
+const LOOKBACK_DAYS: Partial<Record<TrendWindowKey, number>> = {
+  lookback_7d: 7,
+  lookback_1m: 30,
+  lookback_3m: 90,
 };
 const AUDIENCE_LABELS = new Set(["followers", "subscribers"]);
 
@@ -124,14 +127,22 @@ function parseDate(value: string): number | null {
   return Number.isFinite(t) ? t : null;
 }
 
-function computeChange(
+function toWindowMetrics(snap: SheetSnapshot): WindowMetrics {
+  return {
+    primary_value: snap.metric_value,
+    secondary_label: snap.secondary_label,
+    secondary_value: snap.secondary_value,
+    avg_views: snap.avg_views,
+    engagement_rate: snap.engagement_rate,
+    as_of: snap.date || snap.synced_at,
+  };
+}
+
+function findLookbackSnapshot(
   snapshots: SheetSnapshot[],
-  latestValue: number | null,
   latestDateMs: number,
   days: number,
-): number | null {
-  if (latestValue == null) return null;
-
+): SheetSnapshot | null {
   const target = latestDateMs - days * DAY_MS;
   let best: SheetSnapshot | null = null;
   let bestDelta = Number.POSITIVE_INFINITY;
@@ -139,7 +150,6 @@ function computeChange(
   for (const snap of snapshots) {
     const t = parseDate(snap.date);
     if (t == null || t >= latestDateMs) continue;
-    if (snap.metric_value == null) continue;
 
     const delta = Math.abs(t - target);
     const isOnOrBefore = t <= target;
@@ -155,13 +165,13 @@ function computeChange(
     }
   }
 
-  if (!best || best.metric_value == null) return null;
+  if (!best) return null;
 
   const bestTime = parseDate(best.date)!;
   const ageDays = (latestDateMs - bestTime) / DAY_MS;
   if (ageDays < days * 0.5) return null;
 
-  return latestValue - best.metric_value;
+  return best;
 }
 
 function mapSnapshotsToPayload(snapshots: SheetSnapshot[]): SocialStatsPayload {
@@ -200,19 +210,19 @@ function mapSnapshotsToPayload(snapshots: SheetSnapshot[]): SocialStatsPayload {
       }
     }
 
-    const trends: Record<TrendWindowKey, number | null> = {
-      change_7d: null,
-      change_1m: null,
-      change_3m: null,
+    const windows: Record<TrendWindowKey, WindowMetrics | null> = {
+      now: toWindowMetrics(latest),
+      lookback_7d: null,
+      lookback_1m: null,
+      lookback_3m: null,
     };
 
-    for (const key of Object.keys(TREND_DAYS) as TrendWindowKey[]) {
-      trends[key] = computeChange(
-        sorted,
-        latest.metric_value,
-        latestDateMs,
-        TREND_DAYS[key],
-      );
+    for (const [key, days] of Object.entries(LOOKBACK_DAYS) as [
+      TrendWindowKey,
+      number,
+    ][]) {
+      const snap = findLookbackSnapshot(sorted, latestDateMs, days);
+      windows[key] = snap ? toWindowMetrics(snap) : null;
     }
 
     if (
@@ -230,23 +240,18 @@ function mapSnapshotsToPayload(snapshots: SheetSnapshot[]): SocialStatsPayload {
       handle: latest.handle,
       url: latest.url,
       primary_label: latest.metric_label,
-      primary_value: latest.metric_value,
-      secondary_label: latest.secondary_label,
-      secondary_value: latest.secondary_value,
-      change_7d: trends.change_7d,
-      change_1m: trends.change_1m,
-      change_3m: trends.change_3m,
-      avg_views: latest.avg_views,
-      engagement_rate: latest.engagement_rate,
       source: latest.source,
       last_synced_at: latest.synced_at,
       status: latest.status,
+      windows,
     });
   }
 
   rows.sort((a, b) => {
     if (a.status !== b.status) return a.status === "active" ? -1 : 1;
-    return (b.primary_value ?? -1) - (a.primary_value ?? -1);
+    return (
+      (b.windows.now?.primary_value ?? -1) - (a.windows.now?.primary_value ?? -1)
+    );
   });
 
   return {
@@ -303,11 +308,8 @@ function parseSheetCsv(csvText: string): SocialStatsPayload {
       ),
       source: (get(cells, "source") ?? "").trim(),
       synced_at:
-        (
-          get(cells, "synced_at") ??
-          get(cells, "last_synced_at") ??
-          ""
-        ).trim() || null,
+        (get(cells, "synced_at") ?? get(cells, "last_synced_at") ?? "").trim() ||
+        null,
       status,
     });
   }
@@ -342,11 +344,6 @@ export function formatStatNumber(value: number) {
   }).format(value);
 }
 
-export function formatTrendChange(value: number) {
-  const sign = value > 0 ? "+" : "";
-  return `${sign}${formatStatNumber(value)}`;
-}
-
 export function formatEngagementRate(value: number) {
   return `${value.toFixed(2)}%`;
 }
@@ -359,5 +356,17 @@ export function formatSyncedAt(iso: string) {
     }).format(new Date(iso));
   } catch {
     return iso;
+  }
+}
+
+export function formatAsOfDate(value: string) {
+  try {
+    return new Intl.DateTimeFormat("en", {
+      month: "short",
+      day: "numeric",
+      year: "numeric",
+    }).format(new Date(value));
+  } catch {
+    return value;
   }
 }

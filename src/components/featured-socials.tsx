@@ -6,10 +6,10 @@ import { ExternalLink, TrendingUp, Users } from "lucide-react";
 import { socials } from "@/lib/constants/socials";
 import { analyticsEvents } from "@/lib/analytics";
 import {
+  formatAsOfDate,
   formatEngagementRate,
   formatStatNumber,
   formatSyncedAt,
-  formatTrendChange,
   resolveSocialId,
   trendWindows,
   type SocialStatRow,
@@ -30,7 +30,7 @@ export default function FeaturedSocials({
   totalFollowers,
   lastSyncedAt,
 }: FeaturedSocialsProps) {
-  const [windowKey, setWindowKey] = useState<TrendWindowKey>("change_7d");
+  const [windowKey, setWindowKey] = useState<TrendWindowKey>("now");
   const socialById = new Map(socials.map((s) => [s.id, s]));
 
   return (
@@ -73,14 +73,14 @@ export default function FeaturedSocials({
               <p className="text-sm font-medium">Main platforms</p>
             </div>
             <p className="text-sm text-neutral-600 dark:text-muted-foreground">
-              Current counts with growth for the selected window.
+              Followers, views, and engagement for the selected window.
             </p>
           </div>
 
           <div
             role="tablist"
-            aria-label="Trend window"
-            className="mx-auto flex w-fit rounded-md border border-zinc-200 p-1 dark:border-zinc-800 sm:mx-0"
+            aria-label="Lookback window"
+            className="mx-auto flex w-fit max-w-full flex-wrap justify-center rounded-md border border-zinc-200 p-1 dark:border-zinc-800 sm:mx-0"
           >
             {trendWindows.map((window) => {
               const selected = windowKey === window.key;
@@ -109,10 +109,9 @@ export default function FeaturedSocials({
             const social = socialById.get(resolveSocialId(row.id));
             const Icon = social?.icon;
             const href = social?.link ?? row.url;
-            const change = row[windowKey];
+            const metrics = row.windows[windowKey];
             const isInactive = row.status === "inactive";
-            const windowLabel =
-              trendWindows.find((w) => w.key === windowKey)?.label ?? "";
+            const hasSnapshot = metrics != null;
 
             return (
               <li key={row.id} className="min-w-0">
@@ -162,84 +161,73 @@ export default function FeaturedSocials({
                     />
                   </div>
 
-                  <div className="flex flex-wrap items-end justify-between gap-3">
-                    <div>
-                      <p className="text-3xl font-semibold tabular-nums tracking-tight text-zinc-900 dark:text-white">
-                        <AnimatedNumber
-                          value={row.primary_value}
-                          format={formatStatNumber}
-                        />
-                      </p>
-                      <p className="text-sm text-neutral-600 dark:text-muted-foreground">
-                        {row.primary_label}
-                      </p>
-                    </div>
+                  {hasSnapshot ? (
+                    <>
+                      <div>
+                        <p className="text-3xl font-semibold tabular-nums tracking-tight text-zinc-900 dark:text-white">
+                          <AnimatedNumber
+                            value={metrics.primary_value}
+                            format={formatStatNumber}
+                          />
+                        </p>
+                        <p className="text-sm text-neutral-600 dark:text-muted-foreground">
+                          {row.primary_label}
+                          {windowKey !== "now" && metrics.as_of ? (
+                            <span className="text-neutral-500">
+                              {" "}
+                              · as of {formatAsOfDate(metrics.as_of)}
+                            </span>
+                          ) : null}
+                        </p>
+                      </div>
 
-                    <div className="text-right">
-                      <p
-                        className={`text-xl font-semibold tabular-nums ${
-                          change == null
-                            ? "text-neutral-400 dark:text-zinc-500"
-                            : change > 0
-                              ? "text-emerald-600 dark:text-emerald-400"
-                              : change < 0
-                                ? "text-red-600 dark:text-red-400"
-                                : "text-neutral-600 dark:text-muted-foreground"
-                        }`}
-                      >
-                        <AnimatedNumber
-                          value={change}
-                          format={formatTrendChange}
-                          duration={0.7}
-                        />
-                      </p>
-                      <p className="text-sm text-neutral-600 dark:text-muted-foreground">
-                        {windowLabel} change
-                      </p>
-                    </div>
-                  </div>
-
-                  <div className="flex flex-wrap gap-x-4 gap-y-1 border-t border-zinc-200/80 pt-3 dark:border-zinc-800">
-                    {row.secondary_label ? (
-                      <p className="text-xs text-neutral-500 dark:text-muted-foreground">
-                        <span className="text-neutral-600 dark:text-zinc-400">
-                          {row.secondary_label}:
-                        </span>{" "}
-                        <AnimatedNumber
-                          value={row.secondary_value}
-                          format={formatStatNumber}
-                          className="tabular-nums text-zinc-700 dark:text-zinc-300"
-                          duration={0.75}
-                        />
-                      </p>
-                    ) : null}
-                    {row.avg_views != null ? (
-                      <p className="text-xs text-neutral-500 dark:text-muted-foreground">
-                        <span className="text-neutral-600 dark:text-zinc-400">
-                          Avg views:
-                        </span>{" "}
-                        <AnimatedNumber
-                          value={row.avg_views}
-                          format={formatStatNumber}
-                          className="tabular-nums text-zinc-700 dark:text-zinc-300"
-                          duration={0.75}
-                        />
-                      </p>
-                    ) : null}
-                    {row.engagement_rate != null ? (
-                      <p className="text-xs text-neutral-500 dark:text-muted-foreground">
-                        <span className="text-neutral-600 dark:text-zinc-400">
-                          Engagement:
-                        </span>{" "}
-                        <AnimatedNumber
-                          value={row.engagement_rate}
-                          format={formatEngagementRate}
-                          className="tabular-nums text-zinc-700 dark:text-zinc-300"
-                          duration={0.75}
-                        />
-                      </p>
-                    ) : null}
-                  </div>
+                      <div className="flex flex-wrap gap-x-4 gap-y-1 border-t border-zinc-200/80 pt-3 dark:border-zinc-800">
+                        {metrics.secondary_label ? (
+                          <p className="text-xs text-neutral-500 dark:text-muted-foreground">
+                            <span className="text-neutral-600 dark:text-zinc-400">
+                              {metrics.secondary_label}:
+                            </span>{" "}
+                            <AnimatedNumber
+                              value={metrics.secondary_value}
+                              format={formatStatNumber}
+                              className="tabular-nums text-zinc-700 dark:text-zinc-300"
+                              duration={0.75}
+                            />
+                          </p>
+                        ) : null}
+                        {metrics.avg_views != null ? (
+                          <p className="text-xs text-neutral-500 dark:text-muted-foreground">
+                            <span className="text-neutral-600 dark:text-zinc-400">
+                              Avg views:
+                            </span>{" "}
+                            <AnimatedNumber
+                              value={metrics.avg_views}
+                              format={formatStatNumber}
+                              className="tabular-nums text-zinc-700 dark:text-zinc-300"
+                              duration={0.75}
+                            />
+                          </p>
+                        ) : null}
+                        {metrics.engagement_rate != null ? (
+                          <p className="text-xs text-neutral-500 dark:text-muted-foreground">
+                            <span className="text-neutral-600 dark:text-zinc-400">
+                              Engagement:
+                            </span>{" "}
+                            <AnimatedNumber
+                              value={metrics.engagement_rate}
+                              format={formatEngagementRate}
+                              className="tabular-nums text-zinc-700 dark:text-zinc-300"
+                              duration={0.75}
+                            />
+                          </p>
+                        ) : null}
+                      </div>
+                    </>
+                  ) : (
+                    <p className="text-sm text-neutral-500 dark:text-zinc-500">
+                      No snapshot far enough back for this window yet.
+                    </p>
+                  )}
                 </TrackedLink>
               </li>
             );
