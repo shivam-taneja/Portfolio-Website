@@ -60,4 +60,9 @@ export const mentorships: Mentorship[] = [
     role: "Judge",
     link: "https://www.linkedin.com/posts/shivam-taneja_hacktoberfest-hackdaybengaluru-opensource-ugcPost-7519882942676951040-4pRS",
   },
+  {
+    title: "AHVG BuilderVerse 2026",
+    role: "Mentor",
+    link: "https://www.linkedin.com/posts/ahvgbuilderverse2026-hackgyanverse-avaroite-share-7522358381890842624-TVL1",
+  },
 ];
