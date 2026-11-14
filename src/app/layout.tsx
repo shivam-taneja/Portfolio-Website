@@ -22,27 +22,28 @@ const spaceGrotesk = Space_Grotesk({
   display: "swap",
 });
 
+const homeTitle = "Shivam Taneja | Full Stack Developer in Bangalore";
+const homeDescription =
+  "Shivam Taneja is a full stack developer and Associate Consultant at KPMG in Bangalore. Projects, experience, and build-in-public work as @codesbyshivam.";
+
 export const metadata: Metadata = {
   ...defaultMetadata,
-  title: "Shivam Taneja - Full Stack Developer | Portfolio",
-  description:
-    "Shivam Taneja (shivamtaneja) is a Full Stack Developer and Associate SDE at NTT Data. Explore projects, skills, and experience in React, Next.js, and Node.js.",
+  title: homeTitle,
+  description: homeDescription,
   keywords: [
     ...(defaultMetadata.keywords as string[]),
     "Shivam Taneja portfolio",
     "Shivam Taneja full stack developer",
-    "Shivam Taneja NTT Data",
+    "Shivam Taneja KPMG",
   ],
   openGraph: {
-    title: "Shivam Taneja - Full Stack Developer | Portfolio",
-    description:
-      "Explore Shivam Taneja's portfolio and discover innovative projects and cutting-edge web development solutions.",
+    title: homeTitle,
+    description: homeDescription,
     ...defaultMetadata.openGraph,
   },
   twitter: {
-    title: "Shivam Taneja - Full Stack Developer | Portfolio",
-    description:
-      "Explore Shivam Taneja's portfolio and discover innovative projects and cutting-edge web development solutions.",
+    title: homeTitle,
+    description: homeDescription,
     ...defaultMetadata.twitter,
   },
 };
@@ -78,9 +79,9 @@ export default function RootLayout({
           />
         </noscript> */}
 
-        <PostHogProvider>
-          <StructuredData />
+        <StructuredData />
 
+        <PostHogProvider>
           <GrainyFilter />
 
           <ThemeProvider

@@ -1,6 +1,6 @@
-import Script from "next/script";
-
 import { socialProfileUrls } from "@/lib/constants/socials";
+
+import JsonLd from "@/components/json-ld";
 
 const StructuredData = () => {
   const structuredData = {
@@ -45,6 +45,7 @@ const StructuredData = () => {
         ],
         sameAs: [
           "https://www.shivamtaneja.com",
+          "https://www.codesbyshivam.com",
           ...socialProfileUrls,
           "https://g.co/kgs/3dIQL5SNXiQt2B8HQ",
         ],
@@ -98,13 +99,7 @@ const StructuredData = () => {
     ],
   };
 
-  return (
-    <Script
-      id="structured-data"
-      type="application/ld+json"
-      dangerouslySetInnerHTML={{ __html: JSON.stringify(structuredData) }}
-    />
-  );
+  return <JsonLd id="structured-data" data={structuredData} />;
 };
 
 export default StructuredData;
