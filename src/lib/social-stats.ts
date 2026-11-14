@@ -317,6 +317,7 @@ function parseSheetCsv(csvText: string): SocialStatsPayload {
   return mapSnapshotsToPayload(snapshots);
 }
 
+/** Daily platform metrics tab (workbook also has a top-posts tab at gid=1767961707). */
 const SOCIAL_STATS_CSV_URL =
   "https://docs.google.com/spreadsheets/d/e/2PACX-1vRdmkCRRZ7U_i7mxZvl5R-pFvQCebJa000IkerBkFhxt2e36QSJWeUJSEkK7vbRsTATTVs3Mbm6Hyj5/pub?gid=1703766040&single=true&output=csv";
 
