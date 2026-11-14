@@ -30,17 +30,23 @@ export const defaultMetadata: Partial<Metadata> = {
     "Full Stack Developer",
     "Shivam Taneja Developer",
     "Shivam Taneja Projects",
-    "Shivam Taneja NTT Data",
+    "Shivam Taneja Bangalore",
     "Hire Shivam Taneja",
     "Full Stack Development",
     "React Developer Portfolio",
     "codesbyshivam",
   ],
   icons: {
-    icon: "/logo-new.svg",
+    icon: [
+      { url: "/favicon.ico", sizes: "48x48", type: "image/x-icon" },
+      { url: "/logo-new.svg", type: "image/svg+xml" },
+    ],
+    apple: [
+      { url: "/apple-touch-icon.png", sizes: "180x180", type: "image/png" },
+    ],
   },
   alternates: {
-    canonical: "https://www.shivamtaneja.com/",
+    canonical: "https://www.shivamtaneja.com",
   },
   robots: "index, follow",
   authors: [{ name: "Shivam Taneja" }],

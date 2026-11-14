@@ -1,10 +1,10 @@
 import { Metadata } from "next";
-import Script from "next/script";
 
 import { defaultMetadata } from "@/lib/constants/metadata";
 import { experiences } from "@/lib/constants/experience";
 import { calculateTotalExperience } from "@/lib/utils";
 
+import JsonLd from "@/components/json-ld";
 import Wrapper from "@/components/wrapper";
 import { CircleDot } from "lucide-react";
 
@@ -56,11 +56,7 @@ const ExperiencePage = () => {
 
   return (
     <>
-      <Script
-        id="experience-collection-schema"
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(structuredData) }}
-      />
+      <JsonLd id="experience-collection-schema" data={structuredData} />
 
       <Wrapper>
         <div className="flex flex-col gap-6">

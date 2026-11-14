@@ -1,5 +1,4 @@
 import { Metadata } from "next";
-import Script from "next/script";
 import { ArrowUpRight, ExternalLink } from "lucide-react";
 
 import { defaultMetadata } from "@/lib/constants/metadata";
@@ -7,6 +6,7 @@ import { navSocials } from "@/lib/constants/socials";
 import { analyticsEvents } from "@/lib/analytics";
 import { getSocialStats, resolveSocialId } from "@/lib/social-stats";
 
+import JsonLd from "@/components/json-ld";
 import Wrapper from "@/components/wrapper";
 import TrackedLink from "@/components/tracked-link";
 import FeaturedSocials from "@/components/featured-socials";
@@ -75,11 +75,7 @@ const SocialsPage = async () => {
 
   return (
     <>
-      <Script
-        id="socials-collection-schema"
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(structuredData) }}
-      />
+      <JsonLd id="socials-collection-schema" data={structuredData} />
 
       <Wrapper>
         <section className="mx-auto flex w-full flex-col gap-10 text-center md:text-start">
@@ -93,7 +89,7 @@ const SocialsPage = async () => {
           </div>
 
           <TrackedLink
-            href="https://codesbyshivam.com"
+            href="https://www.codesbyshivam.com"
             target="_blank"
             rel="noopener noreferrer"
             className="group flex w-full items-center gap-3 rounded-md border border-zinc-200 bg-zinc-50/80 px-4 py-4 text-left transition-colors hover:bg-zinc-100 dark:border-zinc-800 dark:bg-zinc-900/40 dark:hover:bg-zinc-800/60"
@@ -109,7 +105,7 @@ const SocialsPage = async () => {
               </p>
               <p className="mt-0.5 text-sm text-neutral-600 dark:text-muted-foreground">
                 Brand home — media kit, assets, and collaborations on
-                codesbyshivam.com
+                www.codesbyshivam.com
               </p>
             </div>
             <ArrowUpRight

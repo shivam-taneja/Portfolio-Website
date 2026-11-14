@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useMemo, useState } from "react";
+import { useEffect, useLayoutEffect, useMemo, useState } from "react";
 import { animate, useMotionValue, useMotionValueEvent } from "motion/react";
 
 import { delays } from "@/lib/constants/delays";
@@ -51,6 +51,9 @@ function resolveFormat(
   return variantFormatters[format ?? "auto"];
 }
 
+const useIsoLayoutEffect =
+  typeof window !== "undefined" ? useLayoutEffect : useEffect;
+
 export default function AnimatedNumber({
   value,
   format = "auto",
@@ -61,13 +64,20 @@ export default function AnimatedNumber({
   const [revealed, setRevealed] = useState(false);
   const formatValue = useMemo(() => resolveFormat(format), [format]);
   const motionValue = useMotionValue(0);
+  // Server HTML keeps the real figure. The count-up still starts at zero in the browser.
   const [display, setDisplay] = useState(
-    value == null ? "—" : formatValue(0),
+    value == null ? "—" : formatValue(value),
   );
 
   useMotionValueEvent(motionValue, "change", (latest) => {
     setDisplay(formatValue(latest));
   });
+
+  useIsoLayoutEffect(() => {
+    if (value == null || revealed) return;
+    motionValue.set(0);
+    setDisplay(formatValue(0));
+  }, [value, revealed, formatValue, motionValue]);
 
   useEffect(() => {
     const pageDelay = isFirstLoad
@@ -85,12 +95,9 @@ export default function AnimatedNumber({
       return;
     }
 
-    if (!revealed) {
-      setDisplay(formatValue(0));
-      motionValue.set(0);
-      return;
-    }
+    if (!revealed) return;
 
+    motionValue.set(0);
     const controls = animate(motionValue, value, {
       duration,
       ease: [0.16, 1, 0.3, 1],

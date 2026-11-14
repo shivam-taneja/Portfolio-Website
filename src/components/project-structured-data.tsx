@@ -1,4 +1,4 @@
-import Script from "next/script";
+import JsonLd from "@/components/json-ld";
 
 type Props = {
   name: string;
@@ -30,11 +30,5 @@ export default function ProjectStructuredData({
     ...(repo && { codeRepository: repo })
   };
 
-  return (
-    <Script
-      id="project-structured-data"
-      type="application/ld+json"
-      dangerouslySetInnerHTML={{ __html: JSON.stringify(data) }}
-    />
-  );
+  return <JsonLd id="project-structured-data" data={data} />;
 }

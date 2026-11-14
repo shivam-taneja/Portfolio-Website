@@ -29,6 +29,9 @@ export const metadata: Metadata = {
     "Resume",
   ],
   robots: "noindex, follow",
+  alternates: {
+    canonical: null,
+  },
 };
 
 export default function NotFound() {

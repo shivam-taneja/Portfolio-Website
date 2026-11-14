@@ -35,7 +35,7 @@ export default function FeaturedSocials({
 
   return (
     <div className="flex flex-col gap-10">
-      {totalFollowers != null && (
+      {totalFollowers != null && totalFollowers > 0 && (
         <div className="flex flex-col gap-2 rounded-md border border-zinc-200 bg-zinc-50/80 px-4 py-4 dark:border-zinc-800 dark:bg-zinc-900/40 sm:flex-row sm:items-center sm:justify-between">
           <div className="flex items-center justify-center gap-3 sm:justify-start">
             <Users

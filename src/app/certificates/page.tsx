@@ -1,9 +1,9 @@
 import { Metadata } from "next";
-import Script from "next/script";
 
 import { defaultMetadata } from "@/lib/constants/metadata";
 import { certifications } from "@/lib/constants/certifications";
 
+import JsonLd from "@/components/json-ld";
 import Wrapper from "@/components/wrapper";
 import TrackedLink from "@/components/tracked-link";
 import { analyticsEvents } from "@/lib/analytics";
@@ -18,13 +18,13 @@ import { ExternalLink } from "lucide-react";
 export const metadata: Metadata = {
   ...defaultMetadata,
   title: "Certificates | Shivam Taneja - Full Stack Developer",
-  description: "Explore all certificates and achievements by Shivam Taneja.",
+  description: "Certificates earned by Shivam Taneja, a full stack developer in Bangalore. Azure fundamentals, MongoDB, and generative AI credentials, listed in one place.",
   alternates: {
     canonical: "https://www.shivamtaneja.com/certificates",
   },
   openGraph: {
     title: "Certificates | Shivam Taneja - Full Stack Developer",
-    description: "Explore all certificates and achievements by Shivam Taneja.",
+    description: "Certificates earned by Shivam Taneja, a full stack developer in Bangalore. Azure fundamentals, MongoDB, and generative AI credentials, listed in one place.",
     ...defaultMetadata.openGraph,
     url: "https://www.shivamtaneja.com/certificates",
     images: [
@@ -38,7 +38,7 @@ export const metadata: Metadata = {
   },
   twitter: {
     title: "Certificates | Shivam Taneja",
-    description: "Explore all certificates and achievements by Shivam Taneja.",
+    description: "Certificates earned by Shivam Taneja, a full stack developer in Bangalore. Azure fundamentals, MongoDB, and generative AI credentials, listed in one place.",
     ...defaultMetadata.twitter,
     images: ["/og/certificates"],
   },
@@ -58,11 +58,7 @@ const CertificatesPage = () => {
 
   return (
     <>
-      <Script
-        id="certificates-collection-schema"
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(structuredData) }}
-      />
+      <JsonLd id="certificates-collection-schema" data={structuredData} />
 
       <Wrapper>
         <div className="flex flex-col gap-6">

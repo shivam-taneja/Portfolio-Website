@@ -1,5 +1,4 @@
 import { Metadata } from "next";
-import Script from "next/script";
 
 import { defaultMetadata } from "@/lib/constants/metadata";
 import {
@@ -9,6 +8,7 @@ import {
 
 import ChatBotProject from "@/components/home/chat-bot-project";
 import TrackedLink from "@/components/tracked-link";
+import JsonLd from "@/components/json-ld";
 import Wrapper from "@/components/wrapper";
 import { analyticsEvents } from "@/lib/analytics";
 
@@ -69,11 +69,7 @@ const ProjectsPage = () => {
 
   return (
     <>
-      <Script
-        id="projects-collection-schema"
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(structuredData) }}
-      />
+      <JsonLd id="projects-collection-schema" data={structuredData} />
 
       <Wrapper>
         <div className="flex flex-col gap-6">

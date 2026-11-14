@@ -1,10 +1,10 @@
 import { Metadata } from "next";
-import Script from "next/script";
 
 import { defaultMetadata } from "@/lib/constants/metadata";
 import { mentorships } from "@/lib/constants/mentorship";
 import { appendUTM } from "@/lib/utils";
 
+import JsonLd from "@/components/json-ld";
 import Wrapper from "@/components/wrapper";
 import TrackedLink from "@/components/tracked-link";
 import { analyticsEvents } from "@/lib/analytics";
@@ -62,11 +62,7 @@ const MentorshipPage = () => {
 
   return (
     <>
-      <Script
-        id="mentorship-collection-schema"
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(structuredData) }}
-      />
+      <JsonLd id="mentorship-collection-schema" data={structuredData} />
 
       <Wrapper>
         <div className="flex flex-col gap-6">
