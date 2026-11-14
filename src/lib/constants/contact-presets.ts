@@ -11,6 +11,7 @@ export type ContactPreset = {
  * - https://www.shivamtaneja.com/contact?source=yeet
  * - https://www.shivamtaneja.com/contact?source=badminton
  * - https://www.shivamtaneja.com/contact?source=friction-fixer
+ * - https://www.shivamtaneja.com/contact?source=codesbyshivam
  *
  * Keep subject ≤ 50 and message ≤ 250 (schema limits).
  */
@@ -31,6 +32,12 @@ export const contactPresets = {
     subject: "Friction Fixer question",
     message:
       "Hi Shivam — I came from Friction Fixer and wanted to get in touch.",
+  },
+  codesbyshivam: {
+    label: "CodesByShivam",
+    subject: "CodesByShivam inquiry",
+    message:
+      "Hi Shivam — I came from CodesByShivam and wanted to get in touch.",
   },
 } as const satisfies Record<string, ContactPreset>;
 
