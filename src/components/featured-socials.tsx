@@ -175,7 +175,7 @@ export default function FeaturedSocials({
                           {windowKey !== "now" && metrics.as_of ? (
                             <span className="text-neutral-500">
                               {" "}
-                              · as of {formatAsOfDate(metrics.as_of)}
+                              • as of {formatAsOfDate(metrics.as_of)}
                             </span>
                           ) : null}
                         </p>

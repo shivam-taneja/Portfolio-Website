@@ -1,0 +1,139 @@
+import Wrapper from "@/components/wrapper";
+import BlogPostStructuredData from "@/components/blog-post-structured-data";
+
+<BlogPostStructuredData
+  headline="Building Chat Mingle"
+  description="How I built Chat Mingle, a real-time chat app with React and Firebase. Auth, live messages, and what shipping a small chat room taught me."
+  url="https://www.shivamtaneja.com/blog/building-chat-mingle"
+  datePublished="2026-11-16"
+  image="https://www.shivamtaneja.com/og/blog/building-chat-mingle"
+  keywords={[
+    "Chat Mingle",
+    "chat mingle",
+    "chatmingle",
+    "real-time chat app",
+    "React Firebase chat",
+    "Shivam Taneja",
+  ]}
+/>
+
+export const metadata = {
+  title: "Building Chat Mingle",
+  description:
+    "How I built Chat Mingle, a real-time chat app with React and Firebase. Auth, live messages, and what shipping a small chat room taught me.",
+  keywords: [
+    "Chat Mingle",
+    "chat mingle",
+    "chatmingle",
+    "real-time chat app",
+    "React Firebase chat",
+    "Shivam Taneja",
+    "Vite chat app",
+    "Firebase authentication",
+  ],
+  openGraph: {
+    type: "article",
+    url: "https://www.shivamtaneja.com/blog/building-chat-mingle",
+    title: "Building Chat Mingle | Shivam Taneja",
+    description:
+      "How I built Chat Mingle, a real-time chat app with React and Firebase.",
+    publishedTime: "2026-11-16",
+    authors: ["Shivam Taneja"],
+    images: [
+      {
+        url: "/og/blog/building-chat-mingle",
+        alt: "Building Chat Mingle | Shivam Taneja",
+        width: 1200,
+        height: 630,
+      },
+    ],
+  },
+  twitter: {
+    card: "summary_large_image",
+    creator: "@codesbyshivam",
+    title: "Building Chat Mingle | Shivam Taneja",
+    description:
+      "How I built Chat Mingle, a real-time chat app with React and Firebase.",
+    images: ["/og/blog/building-chat-mingle"],
+  },
+  alternates: {
+    canonical: "https://www.shivamtaneja.com/blog/building-chat-mingle",
+  },
+  robots: "index, follow",
+};
+
+<Wrapper>
+  <article className="flex flex-col gap-6">
+
+    # Building Chat Mingle
+
+    <div className="text-sm dark:text-neutral-500 text-neutral-500">
+      November 16, 2026
+    </div>
+
+    Chat Mingle is a real-time chat app I built as a side project. You sign in,
+    join a shared room, and messages show up for everyone without a refresh. It
+    was my sandbox for learning React and Firebase together, not a Slack
+    replacement.
+
+    - [Try Chat Mingle](https://chat-mingle.shivamtaneja.com/)
+    - [Project page](https://www.shivamtaneja.com/projects/chat-mingle)
+    - [Source on GitHub](https://github.com/shiivamtaneja/chat-mingle)
+
+    <SubSection title="Why I built Chat Mingle">
+      I wanted a side project that felt alive. A todo list can wait. A chat
+      room updates while you watch, so every auth bug and every listener
+      mistake shows up immediately.
+
+      Chat Mingle started as a learning build: one shared conversation, real
+      accounts, and a message history that still feels instant. If you searched
+      for chat mingle or chatmingle and landed here, this is that app.
+    </SubSection>
+
+    <SubSection title="What you can do">
+      - Create an account or sign in
+      - Send messages that appear for other signed-in users right away
+      - Scroll back through earlier messages in the same room
+      - Stay in one shared conversation instead of private DMs
+
+      That is the whole product surface on purpose. Fewer features meant I
+      could finish the loop: auth, write, listen, render.
+    </SubSection>
+
+    <SubSection title="How Chat Mingle is built">
+      The front end is React 18 with Vite. Styling is SASS. Routing uses React
+      Router. Firebase handles accounts and the live message store.
+
+      When someone posts a message, Firebase updates the data and the client
+      listeners push that change into the UI. There is no custom WebSocket
+      server on my side. React Firebase Hooks keep that wiring short.
+
+      Stack:
+      - React 18
+      - Firebase
+      - React Firebase Hooks
+      - React Router
+      - SASS
+      - Vite
+    </SubSection>
+
+    <SubSection title="What I learned">
+      Real-time UI forces you to think about loading states, empty rooms, and
+      what happens when two people type at once. Auth is not a sidebar feature
+      either. Until sign-in works, nobody can chat.
+
+      Shipping Chat Mingle also meant accepting a small scope. One room. One
+      history. Enough to prove the idea and keep the project usable.
+    </SubSection>
+
+    <SubSection title="Try Chat Mingle">
+      The live app is at
+      [chat-mingle.shivamtaneja.com](https://chat-mingle.shivamtaneja.com/).
+      For a shorter summary, see the
+      [Chat Mingle project page](https://www.shivamtaneja.com/projects/chat-mingle).
+
+      Built by Shivam Taneja.
+    </SubSection>
+
+  </article>
+</Wrapper>

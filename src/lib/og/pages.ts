@@ -43,6 +43,13 @@ export const pageOgCards = {
     tags: ["Visits", "Traffic", "Projects"],
     titleSize: 76,
   },
+  blog: {
+    path: "~/blog",
+    title: "Writing",
+    description: "notes on side projects I have shipped, including Chat Mingle.",
+    tags: ["Blog", "Projects", "Build logs"],
+    titleSize: 76,
+  },
 } satisfies Record<string, OgCardContent>;
 
 export type PageOgKey = keyof typeof pageOgCards;

@@ -23,6 +23,7 @@ import {
   Laptop,
   FolderOpen,
   Share2,
+  PenLine,
 } from "lucide-react";
 import { analyticsEvents, captureEvent } from "@/lib/analytics";
 
@@ -138,6 +139,12 @@ export function CommandPalette() {
             >
               <FolderOpen className="mr-2 h-4 w-4" />
               <span>Projects</span>
+            </CommandItem>
+            <CommandItem
+              onSelect={() => runCommand("blog", () => router.push("/blog"))}
+            >
+              <PenLine className="mr-2 h-4 w-4" />
+              <span>Writing</span>
             </CommandItem>
             <CommandItem
               onSelect={() =>

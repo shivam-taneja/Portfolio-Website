@@ -32,6 +32,16 @@ export function matchPath(pathname: string, isFirstLoad: boolean) {
     }
   }
 
+  if (pathname.startsWith("/blog")) {
+    const slug = pathname.split("/blog/")[1];
+
+    if (slug && pathNames.blog[slug as keyof typeof pathNames.blog]) {
+      return isFirstLoad
+        ? pathNames.blog[slug as keyof typeof pathNames.blog]
+        : `<${pathNames.blog[slug as keyof typeof pathNames.blog]} />`;
+    }
+  }
+
   return "Not Found";
 }
 

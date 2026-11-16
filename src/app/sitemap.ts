@@ -1,6 +1,23 @@
 import { MetadataRoute } from "next";
 
+import { blogPosts } from "@/lib/constants/blog";
+
 export default async function sitemaps(): Promise<MetadataRoute.Sitemap> {
+  const blogEntries: MetadataRoute.Sitemap = [
+    {
+      url: "https://www.shivamtaneja.com/blog",
+      lastModified: new Date(),
+      priority: 0.8,
+      changeFrequency: "weekly",
+    },
+    ...blogPosts.map((post) => ({
+      url: `https://www.shivamtaneja.com${post.href}`,
+      lastModified: new Date(post.datePublished),
+      priority: 0.7,
+      changeFrequency: "monthly" as const,
+    })),
+  ];
+
   return [
     {
       url: "https://www.shivamtaneja.com",
@@ -50,6 +67,7 @@ export default async function sitemaps(): Promise<MetadataRoute.Sitemap> {
       priority: 0.5,
       changeFrequency: "daily",
     },
+    ...blogEntries,
 
     // projects
     {

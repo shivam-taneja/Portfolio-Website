@@ -7,6 +7,10 @@ export const pathNames = {
     "/mentorship": "Mentorship",
     "/stats": "Stats",
     "/socials": "Socials",
+    "/blog": "Writing",
+  },
+  blog: {
+    "building-chat-mingle": "Blog | Building Chat Mingle",
   },
   projects: {
     "chat-mingle": "Project | Chat Mingle",
