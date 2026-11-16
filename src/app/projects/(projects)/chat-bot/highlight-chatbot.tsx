@@ -21,7 +21,7 @@ function HighlightChatbot() {
 
       <li className="relative w-fit">
         <Link
-          href="https://github.com/shiivamtaneja/Portfolio-Website/tree/design-v2"
+          href="https://github.com/shivam-taneja/Portfolio-Website/tree/design-v2"
           rel="noopener noreferrer"
           target="_blank"
           className="relative overflow-hidden"
