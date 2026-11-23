@@ -46,7 +46,8 @@ export const pageOgCards = {
   blog: {
     path: "~/blog",
     title: "Writing",
-    description: "notes on side projects I have shipped, including Chat Mingle.",
+    description:
+      "notes on side projects I have shipped, including Chat Mingle and Bhondu Life.",
     tags: ["Blog", "Projects", "Build logs"],
     titleSize: 76,
   },
