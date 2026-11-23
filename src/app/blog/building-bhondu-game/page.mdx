@@ -1,0 +1,142 @@
+import Wrapper from "@/components/wrapper";
+import BlogPostStructuredData from "@/components/blog-post-structured-data";
+
+<BlogPostStructuredData
+  headline="Building Bhondu Game"
+  description="How I built Bhondu Life, a desi turn-based life simulator. Daily situations, choices, a leaderboard, and what shipping the game taught me."
+  url="https://www.shivamtaneja.com/blog/building-bhondu-game"
+  datePublished="2026-11-23"
+  image="https://www.shivamtaneja.com/og/blog/building-bhondu-game"
+  keywords={[
+    "Bhondu Game",
+    "Bhondu Life",
+    "bhondu game",
+    "bhondu life",
+    "desi life simulator",
+    "Shivam Taneja",
+  ]}
+/>
+
+export const metadata = {
+  title: "Building Bhondu Game",
+  description:
+    "How I built Bhondu Life, a desi turn-based life simulator. Daily situations, choices, a leaderboard, and what shipping the game taught me.",
+  keywords: [
+    "Bhondu Game",
+    "Bhondu Life",
+    "bhondu game",
+    "bhondu life",
+    "bhondugame",
+    "desi life simulator",
+    "turn-based game",
+    "Shivam Taneja",
+    "React Native",
+    "Next.js",
+  ],
+  openGraph: {
+    type: "article",
+    url: "https://www.shivamtaneja.com/blog/building-bhondu-game",
+    title: "Building Bhondu Game | Shivam Taneja",
+    description:
+      "How I built Bhondu Life, a desi turn-based life simulator.",
+    publishedTime: "2026-11-23",
+    authors: ["Shivam Taneja"],
+    images: [
+      {
+        url: "/og/blog/building-bhondu-game",
+        alt: "Building Bhondu Game | Shivam Taneja",
+        width: 1200,
+        height: 630,
+      },
+    ],
+  },
+  twitter: {
+    card: "summary_large_image",
+    creator: "@codesbyshivam",
+    title: "Building Bhondu Game | Shivam Taneja",
+    description:
+      "How I built Bhondu Life, a desi turn-based life simulator.",
+    images: ["/og/blog/building-bhondu-game"],
+  },
+  alternates: {
+    canonical: "https://www.shivamtaneja.com/blog/building-bhondu-game",
+  },
+  robots: "index, follow",
+};
+
+<Wrapper>
+  <article className="flex flex-col gap-6">
+
+    # Building Bhondu Game
+
+    <div className="text-sm dark:text-neutral-500 text-neutral-500">
+      November 23, 2026
+    </div>
+
+    Bhondu Life is a desi turn-based life simulator I built. On this site the
+    project is Bhondu Game. Each day gives you a new situation. You make a
+    choice, and that choice shapes how the story ends. The days come from
+    college lectures, office drama, shaadi pressure, and uncle encounters.
+
+    - [Play Bhondu Life](https://www.bhondugame.com/)
+    - [Project page](https://www.shivamtaneja.com/projects/bhondu-game)
+
+    <SubSection title="Why I built Bhondu Game">
+      I built Bhondu Life around one repeated day. A situation shows up, taken
+      from desi life. You pick a funny choice, a jugaad choice, or a cringey
+      choice, and you earn Bhondu Points. College, office, shaadi, and uncle
+      mode are the stages you move through. Daily kalesh is part of that day.
+      Achievements unlock as you play, and a leaderboard ranks players toward
+      Param Bhondu.
+
+      If you searched for bhondu game, bhondu life, or bhondugame and landed
+      here, this is that project.
+    </SubSection>
+
+    <SubSection title="What you can do">
+      - Play a fresh situation each day, based on desi life
+      - Move through college, office, shaadi, and uncle mode
+      - Make a funny, jugaad, or cringey choice and earn Bhondu Points
+      - Track stats, including Jugaad, Kalesh, and Chill
+      - Handle daily kalesh
+      - Unlock mini-games and achievements as you play
+      - Climb a leaderboard with other players
+      - Play as a guest, or sign in to save progress
+
+      You can play the web app, or download the mobile apps. Guest play works
+      without an account. Sign in when you want that progress saved.
+    </SubSection>
+
+    <SubSection title="How Bhondu Game is built">
+      The project page splits the build into three parts. Mobile apps use React
+      Native. The web app uses Next.js. The backend and the database use NestJS
+      and Firebase.
+
+      Stack:
+      - React Native
+      - Next.js
+      - NestJS
+      - Firebase
+    </SubSection>
+
+    <SubSection title="What I learned">
+      Guest play has to stand on its own. You can start without an account.
+      Sign-in is there so progress can be saved.
+
+      The build has three parts. React Native for the mobile apps, Next.js for
+      the web app, and NestJS with Firebase for the backend and the data. The
+      loop a player sees is a situation, a choice, and Bhondu Points. The rank
+      you play toward is Param Bhondu.
+    </SubSection>
+
+    <SubSection title="Try Bhondu Game">
+      The live game is at
+      [bhondugame.com](https://www.bhondugame.com/).
+      For a shorter summary, see the
+      [Bhondu Life project page](https://www.shivamtaneja.com/projects/bhondu-game).
+
+      Built by Shivam Taneja.
+    </SubSection>
+
+  </article>
+</Wrapper>

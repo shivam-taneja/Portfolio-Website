@@ -15,6 +15,29 @@ export type BlogPost = {
 
 export const blogPosts: BlogPost[] = [
   {
+    title: "Building Bhondu Game",
+    slug: "building-bhondu-game",
+    href: "/blog/building-bhondu-game",
+    description:
+      "How I built Bhondu Life, a desi turn-based life simulator. Daily situations, choices, a leaderboard, and what shipping the game taught me.",
+    dateLabel: "Nov 23, 2026",
+    datePublished: "2026-11-23",
+    keywords: [
+      "Bhondu Game",
+      "Bhondu Life",
+      "bhondu game",
+      "bhondu life",
+      "bhondugame",
+      "desi life simulator",
+      "turn-based game",
+      "Shivam Taneja",
+    ],
+    tags: ["React Native", "Next.js", "NestJS", "Firebase"],
+    og: {
+      description: "a desi turn-based life simulator. how I built it.",
+    },
+  },
+  {
     title: "Building Chat Mingle",
     slug: "building-chat-mingle",
     href: "/blog/building-chat-mingle",
