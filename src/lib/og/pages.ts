@@ -12,7 +12,7 @@ export const pageOgCards = {
     path: "~/socials",
     title: "Socials",
     description: "every profile in one place — follow, subscribe, say hi.",
-    tags: ["LinkedIn", "GitHub", "YouTube", "Bluesky", "Threads"],
+    tags: ["Instagram", "LinkedIn", "YouTube", "Facebook", "Threads"],
     titleSize: 76,
   },
   experience: {

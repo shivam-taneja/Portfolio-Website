@@ -2,7 +2,7 @@ import { Metadata } from "next";
 import { ArrowUpRight, ExternalLink } from "lucide-react";
 
 import { defaultMetadata } from "@/lib/constants/metadata";
-import { navSocials } from "@/lib/constants/socials";
+import { navSocials, socials } from "@/lib/constants/socials";
 import { analyticsEvents } from "@/lib/analytics";
 import { getSocialStats, resolveSocialId } from "@/lib/social-stats";
 
@@ -14,7 +14,7 @@ import FeaturedSocials from "@/components/featured-socials";
 export const revalidate = 3600;
 
 const PAGE_DESCRIPTION =
-  "Find Shivam Taneja on LinkedIn, GitHub, YouTube, X, and Instagram — plus the @codesbyshivam brand home.";
+  "Find Shivam Taneja on Instagram, LinkedIn, YouTube, Facebook, Threads, X, and GitHub — plus the @codesbyshivam brand home.";
 
 export const metadata: Metadata = {
   ...defaultMetadata,
@@ -47,10 +47,29 @@ export const metadata: Metadata = {
 
 const SocialsPage = async () => {
   const stats = await getSocialStats();
+  const socialIds = new Set(socials.map((s) => s.id));
+  const featuredRows = stats.rows.filter((row) =>
+    socialIds.has(resolveSocialId(row.id)),
+  );
   const featuredIds = new Set(
-    stats.rows.map((row) => resolveSocialId(row.id)),
+    featuredRows.map((row) => resolveSocialId(row.id)),
   );
   const otherMainSocials = navSocials.filter((s) => !featuredIds.has(s.id));
+
+  const audienceLabels = new Set(["followers", "subscribers"]);
+  let featuredTotalFollowers = 0;
+  let hasFeaturedAudience = false;
+  for (const row of featuredRows) {
+    const value = row.windows.now?.primary_value;
+    if (
+      row.status === "active" &&
+      value != null &&
+      audienceLabels.has(row.primary_label.toLowerCase())
+    ) {
+      featuredTotalFollowers += value;
+      hasFeaturedAudience = true;
+    }
+  }
 
   const structuredData = {
     "@context": "https://schema.org",
@@ -58,7 +77,7 @@ const SocialsPage = async () => {
     name: "Socials | Shivam Taneja",
     url: "https://www.shivamtaneja.com/socials",
     description:
-      "Main public profiles for Shivam Taneja — LinkedIn, GitHub, YouTube, X, and Instagram.",
+      "Main public profiles for Shivam Taneja — Instagram, LinkedIn, YouTube, Facebook, Threads, X, and GitHub.",
     about: {
       "@id": "https://www.shivamtaneja.com/#person",
     },
@@ -114,10 +133,12 @@ const SocialsPage = async () => {
             />
           </TrackedLink>
 
-          {stats.rows.length > 0 ? (
+          {featuredRows.length > 0 ? (
             <FeaturedSocials
-              rows={stats.rows}
-              totalFollowers={stats.totalFollowers}
+              rows={featuredRows}
+              totalFollowers={
+                hasFeaturedAudience ? featuredTotalFollowers : null
+              }
               lastSyncedAt={stats.lastSyncedAt}
             />
           ) : null}
@@ -126,7 +147,7 @@ const SocialsPage = async () => {
             <section className="flex flex-col gap-4">
               <div className="flex flex-col gap-1 text-left">
                 <h2 className="text-lg font-semibold text-zinc-900 dark:text-white">
-                  {stats.rows.length > 0 ? "Also on" : "Main platforms"}
+                  {featuredRows.length > 0 ? "Also on" : "Main platforms"}
                 </h2>
                 <p className="text-sm text-neutral-600 dark:text-muted-foreground">
                   Core profiles without a live stats card yet.
