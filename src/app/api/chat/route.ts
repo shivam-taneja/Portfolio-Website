@@ -122,7 +122,7 @@ export async function POST(req: NextRequest) {
       frequency_penalty: 0.5,
       presence_penalty: 0.5,
       temperature: 0.7,
-      max_tokens: 400,
+      max_tokens: 1024,
       stream: true,
     });
 
