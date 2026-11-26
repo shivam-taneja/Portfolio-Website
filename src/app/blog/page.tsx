@@ -11,7 +11,7 @@ export const metadata: Metadata = {
   ...defaultMetadata,
   title: "Writing | Shivam Taneja",
   description:
-    "Write-ups by Shivam Taneja on side projects, including how Chat Mingle and Bhondu Life were built.",
+    "Write-ups by Shivam Taneja on side projects, including how Chat Mingle, Bhondu Life, and Tiltbot were built.",
   keywords: [
     ...(defaultMetadata.keywords ?? []),
     "Shivam Taneja blog",
@@ -20,6 +20,8 @@ export const metadata: Metadata = {
     "Bhondu Life",
     "Bhondu Game",
     "bhondu game",
+    "Tiltbot",
+    "Tilt-Bot",
   ],
   alternates: {
     canonical: "https://www.shivamtaneja.com/blog",
@@ -29,7 +31,7 @@ export const metadata: Metadata = {
     type: "website",
     title: "Writing | Shivam Taneja",
     description:
-      "Write-ups by Shivam Taneja on side projects, including how Chat Mingle and Bhondu Life were built.",
+      "Write-ups by Shivam Taneja on side projects, including how Chat Mingle, Bhondu Life, and Tiltbot were built.",
     url: "https://www.shivamtaneja.com/blog",
     images: [
       {
@@ -44,7 +46,7 @@ export const metadata: Metadata = {
     ...defaultMetadata.twitter,
     title: "Writing | Shivam Taneja",
     description:
-      "Write-ups by Shivam Taneja on side projects, including how Chat Mingle and Bhondu Life were built.",
+      "Write-ups by Shivam Taneja on side projects, including how Chat Mingle, Bhondu Life, and Tiltbot were built.",
     images: ["/og/blog"],
   },
   robots: "index, follow",
@@ -57,7 +59,7 @@ const BlogPage = () => {
     name: "Writing by Shivam Taneja",
     url: "https://www.shivamtaneja.com/blog",
     description:
-      "Write-ups by Shivam Taneja on side projects, including Chat Mingle and Bhondu Life.",
+      "Write-ups by Shivam Taneja on side projects, including Chat Mingle, Bhondu Life, and Tiltbot.",
     author: {
       "@id": "https://www.shivamtaneja.com/#person",
     },

@@ -15,6 +15,31 @@ export type BlogPost = {
 
 export const blogPosts: BlogPost[] = [
   {
+    title: "Building Tiltbot",
+    slug: "building-tiltbot",
+    href: "/blog/building-tiltbot",
+    description:
+      "How I built Tiltbot, an AI gaming roast generator for witty, non-toxic comebacks. Pick a game, context, and tone, and Groq writes the roasts.",
+    dateLabel: "Nov 26, 2026",
+    datePublished: "2026-11-26",
+    keywords: [
+      "Tiltbot",
+      "Tilt-Bot",
+      "tiltbot",
+      "AI gaming roast generator",
+      "non-toxic comebacks",
+      "Groq AI",
+      "Shivam Taneja",
+      "Next.js",
+      "NestJS",
+    ],
+    tags: ["Next.js", "React", "NestJS", "Groq AI"],
+    og: {
+      description:
+        "an AI gaming roast generator for witty, non-toxic comebacks. how I built it.",
+    },
+  },
+  {
     title: "Building Bhondu Game",
     slug: "building-bhondu-game",
     href: "/blog/building-bhondu-game",
