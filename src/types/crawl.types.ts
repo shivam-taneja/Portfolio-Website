@@ -1,4 +1,6 @@
 export interface CrawlingMetaData {
-  _id?: string;
-  lastCrawledAt: Date;
+  url: string;
+  contentHash: string;
+  memoryIds: string[];
+  lastIngestedAt: Date;
 }

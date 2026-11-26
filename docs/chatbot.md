@@ -119,6 +119,31 @@ interface ChatDocument {
 }
 ```
 
+## Content Ingest (Mem0 sync)
+
+Dev-only endpoint: `GET /api/chat/ingest`
+
+It crawls the local sitemap, hashes each page’s extracted text, and syncs Mem0 using MongoDB `crawling_meta` (url, contentHash, memoryIds):
+
+- **Unchanged pages** → skip
+- **New / changed pages** → delete prior Mem0 memory IDs for that URL, then `add`, upsert meta
+- **Removed pages** (in meta but not sitemap) → delete those memories + meta docs
+
+Wipe only (no ingest):
+
+```bash
+# with `pnpm dev` running
+curl "http://localhost:3000/api/chat/ingest?reset=1"
+```
+
+Ingest / incremental sync (separate step):
+
+```bash
+curl "http://localhost:3000/api/chat/ingest"
+```
+
+`?reset=1` only wipes Mem0 for `shivam_portfolio` and clears `crawling_meta`. It does **not** re-ingest. Call ingest without `reset` when you want to add content.
+
 ## Optimization Techniques
 
 The chatbot implementation uses several techniques to ensure good performance:
@@ -135,10 +160,9 @@ The chatbot requires the following environment variables:
 MONGODB_URI=""
 MONGODB_DB_NAME=""
 MONGODB_COLLECTION_CHATS=""
+MONGODB_COLLECTION_CRAWLING_META=""
 GROQ_API_KEY=""
 MEM0_API_KEY=""
-NEXTAUTH_SECRET=""
-NEXTAUTH_URL="http://localhost:3000"
 ```
 
 ## Future Improvements

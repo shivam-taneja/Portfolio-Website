@@ -1,4 +1,5 @@
 import { ChatDocument } from "@/types/chats.types";
+import { MEM0_USER_ID } from "./constants";
 import { groq } from "./groq";
 import { memoryClient } from "./mem0";
 
@@ -28,7 +29,7 @@ export async function findRelevantContent(
 ): Promise<string | null> {
   try {
     const { results } = await memoryClient.search(message, {
-      filters: { user_id: "shivam_portfolio" },
+      filters: { user_id: MEM0_USER_ID },
     });
 
     if (!results || results.length === 0) {

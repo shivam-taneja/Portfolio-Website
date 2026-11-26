@@ -34,10 +34,10 @@ This portfolio website is built as a modern full-stack application using Next.js
 ### Website Content Flow
 
 1. Content is authored and published to the website
-2. The crawler processes the content via sitemap
-3. Content is cleaned, transformed to markdown
-4. Content is ingested into the Mem0 knowledge base
-5. Metadata is tracked in MongoDB
+2. Dev ingest crawls the local sitemap and extracts page text
+3. Per-URL content hashes decide add / update / skip
+4. Changed pages are delete+add’d in Mem0; removed pages are purged
+5. Per-URL metadata (hash + memory IDs) is tracked in MongoDB `crawling_meta`
 
 ### Chatbot Interaction Flow
 

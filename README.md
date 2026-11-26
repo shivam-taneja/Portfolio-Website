@@ -118,9 +118,9 @@ For detailed information on the dashboard functionality, please see the [Dashboa
 
 ## 🤖 Content Crawler
 
-This project includes an automated content crawler that processes website content and ingests it into Mem0 for the chatbot.
+Dev-only sync: with the site running locally, hit `/api/chat/ingest` to ingest/sync. Use `?reset=1` only to wipe Mem0 + `crawling_meta` (no ingest).
 
-For detailed information on how the crawler works, please see the [Crawler Documentation](/docs/crawler.md).
+Details: [Chatbot Documentation](./docs/chatbot.md#content-ingest-mem0-sync).
 
 ## 📧 Email Functionality
 

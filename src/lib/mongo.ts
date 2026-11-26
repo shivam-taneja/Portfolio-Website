@@ -40,6 +40,36 @@ async function getCrawlingMetaDataCollection() {
   );
 }
 
+async function getAllCrawlingMeta(): Promise<CrawlingMetaData[]> {
+  const collection = await getCrawlingMetaDataCollection();
+  return collection.find({}).toArray();
+}
+
+async function upsertCrawlingMeta(meta: CrawlingMetaData): Promise<void> {
+  const collection = await getCrawlingMetaDataCollection();
+  await collection.updateOne(
+    { url: meta.url },
+    {
+      $set: {
+        contentHash: meta.contentHash,
+        memoryIds: meta.memoryIds,
+        lastIngestedAt: meta.lastIngestedAt,
+      },
+    },
+    { upsert: true },
+  );
+}
+
+async function deleteCrawlingMetaByUrl(url: string): Promise<void> {
+  const collection = await getCrawlingMetaDataCollection();
+  await collection.deleteOne({ url });
+}
+
+async function clearAllCrawlingMeta(): Promise<void> {
+  const collection = await getCrawlingMetaDataCollection();
+  await collection.deleteMany({});
+}
+
 async function appendToConversation(
   sessionId: string,
   message: string,
@@ -78,8 +108,12 @@ async function appendToConversation(
 
 export {
   appendToConversation,
+  clearAllCrawlingMeta,
   connectToDatabase,
+  deleteCrawlingMetaByUrl,
+  getAllCrawlingMeta,
   getChatsCollection,
   getCrawlingMetaDataCollection,
   getDbClient,
+  upsertCrawlingMeta,
 };
