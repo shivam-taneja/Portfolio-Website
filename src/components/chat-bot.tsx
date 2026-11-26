@@ -54,6 +54,32 @@ const SUGGESTED_QUESTIONS = [
   "How can I contact you?",
 ];
 
+const ChatOpeningSkeleton = () => (
+  <div className="space-y-4" aria-busy="true" aria-label="Loading chat">
+    <div className="flex items-start gap-3 w-full">
+      <div className="h-8 w-8 shrink-0 rounded-full bg-muted animate-pulse" />
+      <div className="flex min-w-0 max-w-[80%] flex-col gap-2">
+        <div className="rounded-lg bg-muted p-3 dark:bg-zinc-800">
+          <div className="h-3.5 w-40 animate-pulse rounded-sm bg-neutral-300 dark:bg-neutral-600" />
+        </div>
+        <div className="h-3 w-28 animate-pulse rounded-sm bg-neutral-200 dark:bg-neutral-700" />
+      </div>
+    </div>
+
+    <div className="space-y-3">
+      <div className="mb-3 h-3.5 w-24 animate-pulse rounded-sm bg-neutral-300 dark:bg-neutral-600" />
+      <div className="space-y-2">
+        {SUGGESTED_QUESTIONS.map((_, i) => (
+          <div
+            key={i}
+            className="h-11 w-full animate-pulse rounded-lg bg-zinc-100 dark:bg-zinc-800"
+          />
+        ))}
+      </div>
+    </div>
+  </div>
+);
+
 const ChatBotContent = () => {
   const [open, setOpen] = useState(false);
 
@@ -69,9 +95,19 @@ const ChatBotContent = () => {
     error,
     chatId,
     chatDocument,
+    knowledgeUpdatedAt,
+    isKnowledgeFreshnessLoading,
     handleResetChat,
     sendMessageStream,
   } = useChatBot(open);
+
+  const knowledgeUpdatedLabel = knowledgeUpdatedAt
+    ? new Date(knowledgeUpdatedAt).toLocaleDateString("en-US", {
+        year: "numeric",
+        month: "short",
+        day: "numeric",
+      })
+    : null;
 
   const form = useForm<ChatSchemaT>({
     resolver: zodResolver(chatSchema),
@@ -226,7 +262,7 @@ const ChatBotContent = () => {
 
         <ScrollArea className="h-[400px] p-4">
           <div
-            className="space-y-4"
+            className="min-w-0 space-y-4"
             ref={scrollRef}
             role="log"
             aria-live="polite"
@@ -247,13 +283,15 @@ const ChatBotContent = () => {
                   to reset
                 </p>
               </div>
+            ) : isLoading && messages.length === 0 ? (
+              <ChatOpeningSkeleton />
             ) : (
               <>
                 {messages.map((message, i) => (
                   <MessageItem key={i} message={message} />
                 ))}
 
-                {messages.length === 1 && !isLoading && (
+                {messages.length === 1 && !isPending && (
                   <div className="space-y-3">
                     <p className="text-sm dark:text-gray-400 text-gray-600 mb-3">
                       You can ask me:
@@ -273,25 +311,24 @@ const ChatBotContent = () => {
                   </div>
                 )}
 
-                {isLoading ||
-                  (isPending && (
-                    <div className="flex items-start gap-3">
-                      <Avatar className="h-8 w-8 flex justify-center items-center bg-muted">
-                        <Bot
-                          className="h-4 w-4 text-muted-foreground"
-                          aria-hidden="true"
-                        />
-                      </Avatar>
+                {isPending && (
+                  <div className="flex items-start gap-3">
+                    <Avatar className="h-8 w-8 flex justify-center items-center bg-muted">
+                      <Bot
+                        className="h-4 w-4 text-muted-foreground"
+                        aria-hidden="true"
+                      />
+                    </Avatar>
 
-                      <div
-                        className="rounded-lg px-3 py-2 max-w-[80%] bg-muted"
-                        role="status"
-                        aria-label="Assistant is typing"
-                      >
-                        <Loader2 className="animate-spin" aria-hidden="true" />
-                      </div>
+                    <div
+                      className="rounded-lg px-3 py-2 max-w-[80%] bg-muted"
+                      role="status"
+                      aria-label="Assistant is typing"
+                    >
+                      <Loader2 className="animate-spin" aria-hidden="true" />
                     </div>
-                  ))}
+                  </div>
+                )}
               </>
             )}
           </div>
@@ -335,9 +372,29 @@ const ChatBotContent = () => {
           </form>
         </Form>
 
-        <div className="flex justify-center pb-3">
+        <div className="flex justify-center px-4 pb-3">
           <p className="text-center text-xs dark:text-neutral-400 text-neutral-600">
             Note: Responses aren&apos;t always accurate or complete.
+            {(isKnowledgeFreshnessLoading || knowledgeUpdatedLabel) && (
+              <>
+                {" "}
+                Knowledge last updated{" "}
+                {isKnowledgeFreshnessLoading ? (
+                  <span
+                    aria-hidden="true"
+                    className="inline-block h-3 w-[5.5rem] translate-y-0.5 rounded-sm bg-neutral-300 align-middle dark:bg-neutral-600 animate-pulse"
+                  />
+                ) : (
+                  <time
+                    dateTime={knowledgeUpdatedAt ?? undefined}
+                    className="font-medium text-neutral-700 dark:text-neutral-300"
+                  >
+                    {knowledgeUpdatedLabel}
+                  </time>
+                )}
+                .
+              </>
+            )}
           </p>
         </div>
       </PopoverContent>

@@ -26,6 +26,14 @@ export async function initializeChat(): Promise<{ chatId: string }> {
   return response.json();
 }
 
+export async function fetchKnowledgeFreshness(): Promise<{
+  updatedAt: string | null;
+}> {
+  const response = await fetch("/api/chat/knowledge");
+  if (!response.ok) throw new Error("Failed to fetch knowledge freshness");
+  return response.json();
+}
+
 export function useChatBot(open: boolean) {
   const [messages, setMessages] = useState<ConversationMessage[]>([]);
   const [isPending, setIsPending] = useState(false);
@@ -46,6 +54,15 @@ export function useChatBot(open: boolean) {
     retry: false,
     refetchOnWindowFocus: false,
   });
+
+  const { data: knowledgeFreshness, isLoading: isKnowledgeFreshnessLoading } =
+    useQuery({
+      queryKey: ["chatKnowledgeFreshness"],
+      queryFn: fetchKnowledgeFreshness,
+      enabled: open,
+      staleTime: 5 * 60 * 1000,
+      refetchOnWindowFocus: false,
+    });
 
   useEffect(() => {
     if (chatDocument?.chat.conversation) {
@@ -193,6 +210,8 @@ export function useChatBot(open: boolean) {
     error,
     chatId,
     chatDocument,
+    knowledgeUpdatedAt: knowledgeFreshness?.updatedAt ?? null,
+    isKnowledgeFreshnessLoading,
     handleResetChat,
     sendMessageStream,
   };

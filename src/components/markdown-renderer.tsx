@@ -9,7 +9,7 @@ interface MarkdownRendererProps {
 
 export function MarkdownRenderer({ content }: MarkdownRendererProps) {
   return (
-    <div className="text-sm break-words">
+    <div className="min-w-0 max-w-full text-sm break-words">
       <ReactMarkdown
         remarkPlugins={[remarkGfm]}
         components={{
@@ -49,8 +49,38 @@ export function MarkdownRenderer({ content }: MarkdownRendererProps) {
               {...props}
             />
           ),
+          table: ({ node: _, ...props }) => (
+            <div className="my-2 w-full max-w-full overflow-x-auto overscroll-x-contain rounded-md">
+              <table
+                className="w-full table-fixed border-collapse text-left text-xs"
+                {...props}
+              />
+            </div>
+          ),
+          thead: ({ node: _, ...props }) => (
+            <thead
+              className="border-b border-zinc-300 dark:border-zinc-600"
+              {...props}
+            />
+          ),
+          tbody: ({ node: _, ...props }) => <tbody {...props} />,
+          tr: ({ node: _, ...props }) => (
+            <tr
+              className="border-b border-zinc-200 dark:border-zinc-700 last:border-0"
+              {...props}
+            />
+          ),
+          th: ({ node: _, ...props }) => (
+            <th
+              className="px-2 py-1.5 font-semibold align-bottom break-words"
+              {...props}
+            />
+          ),
+          td: ({ node: _, ...props }) => (
+            <td className="px-2 py-1.5 align-top break-words" {...props} />
+          ),
           pre: ({ node: _, ...props }) => (
-            <div className="bg-zinc-900 border border-zinc-800 rounded-lg py-3 my-2 w-full overflow-x-auto">
+            <div className="bg-zinc-900 border border-zinc-800 rounded-lg py-3 my-2 w-full max-w-full overflow-x-auto overscroll-x-contain">
               <pre
                 className="text-sm font-mono text-zinc-100 m-0 p-0 bg-transparent min-w-full"
                 {...(props as React.HTMLAttributes<HTMLPreElement>)}

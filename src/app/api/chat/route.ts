@@ -4,16 +4,19 @@ import {
   appendToConversation,
   getChatsCollection,
   getDbClient,
+  getLatestKnowledgeUpdatedAt,
 } from "@/lib/mongo";
 
 import { chatSchema } from "@/schema/chat";
 
 import {
+  buildSystemPrompt,
+  buildUserPrompt,
   findRelevantContent,
+  formatKnowledgeUpdatedAt,
   generateChatTitle,
   groq,
   prepareHistoryForAI,
-  SYSTEM_PROMPT,
 } from "@/lib/chat";
 
 export async function POST(req: NextRequest) {
@@ -49,14 +52,21 @@ export async function POST(req: NextRequest) {
       });
     }
 
-    // Prepare history and find relevant content using Mem0
+    // Prepare history, Mem0 context, and knowledge freshness
     const chatHistory = prepareHistoryForAI(existingChat);
-    const relevantContent = await findRelevantContent(message);
+    const [relevantContent, knowledgeUpdatedAt] = await Promise.all([
+      findRelevantContent(message),
+      getLatestKnowledgeUpdatedAt(),
+    ]);
+    const systemPrompt = buildSystemPrompt(knowledgeUpdatedAt);
+    const knowledgeLabel = knowledgeUpdatedAt
+      ? formatKnowledgeUpdatedAt(knowledgeUpdatedAt)
+      : null;
 
     // Fallback if no relevant content found
     if (!relevantContent) {
       const fallbackResponse =
-        "I don't have enough information to answer that question. Feel free to ask me something else about me!";
+        "I don't have enough information to answer that question. Feel free to ask me something else about my work, or reach out via the contact page.";
 
       const stream = new ReadableStream({
         async start(controller) {
@@ -97,12 +107,16 @@ export async function POST(req: NextRequest) {
       messages: [
         {
           role: "system",
-          content: SYSTEM_PROMPT,
+          content: systemPrompt,
         },
         ...chatHistory,
         {
           role: "user",
-          content: `CONTEXT (Information about Shivam Taneja):\n---\n${relevantContent}\n---\n\nVISITOR'S MESSAGE: ${message}\n\nPlease respond in the first person ("I", "my") as Shivam Taneja using the context above. Use standard markdown formatting.`,
+          content: buildUserPrompt({
+            message,
+            relevantContent,
+            knowledgeLabel,
+          }),
         },
       ],
       frequency_penalty: 0.5,

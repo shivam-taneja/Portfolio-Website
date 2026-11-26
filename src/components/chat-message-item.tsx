@@ -40,7 +40,7 @@ export const MessageItem = ({ message }: { message: ConversationMessage }) => {
       >
         <div
           className={cn(
-            "rounded-lg p-3 text-sm flex flex-col min-w-0 overflow-hidden w-full",
+            "rounded-lg p-3 text-sm flex flex-col min-w-0 max-w-full overflow-x-auto overscroll-x-contain w-full",
             message.type === "user"
               ? "dark:bg-primary bg-zinc-900 text-primary-foreground"
               : "bg-muted dark:bg-zinc-800",
