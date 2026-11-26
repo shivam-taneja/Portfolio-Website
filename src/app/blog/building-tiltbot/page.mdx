@@ -1,0 +1,166 @@
+import Wrapper from "@/components/wrapper";
+import BlogPostStructuredData from "@/components/blog-post-structured-data";
+
+<BlogPostStructuredData
+  headline="Building Tiltbot"
+  description="How I built Tiltbot, an AI gaming roast generator. Witty, non-toxic comebacks with Groq, a tone you can pick, and a filter that keeps the banter playful."
+  url="https://www.shivamtaneja.com/blog/building-tiltbot"
+  datePublished="2026-11-26"
+  image="https://www.shivamtaneja.com/og/blog/building-tiltbot"
+  keywords={[
+    "Tiltbot",
+    "Tilt-Bot",
+    "tiltbot",
+    "AI roast generator",
+    "gaming comebacks",
+    "Shivam Taneja",
+  ]}
+/>
+
+export const metadata = {
+  title: "Building Tiltbot",
+  description:
+    "How I built Tiltbot, an AI gaming roast generator. Witty, non-toxic comebacks with Groq, a tone you can pick, and a filter that keeps the banter playful.",
+  keywords: [
+    "Tiltbot",
+    "Tilt-Bot",
+    "tiltbot",
+    "tilt bot",
+    "AI roast generator",
+    "gaming comebacks",
+    "non-toxic trash talk",
+    "Groq AI",
+    "Shivam Taneja",
+    "Next.js",
+    "NestJS",
+  ],
+  openGraph: {
+    type: "article",
+    url: "https://www.shivamtaneja.com/blog/building-tiltbot",
+    title: "Building Tiltbot | Shivam Taneja",
+    description:
+      "How I built Tiltbot, an AI gaming roast generator.",
+    publishedTime: "2026-11-26",
+    authors: ["Shivam Taneja"],
+    images: [
+      {
+        url: "/og/blog/building-tiltbot",
+        alt: "Building Tiltbot | Shivam Taneja",
+        width: 1200,
+        height: 630,
+      },
+    ],
+  },
+  twitter: {
+    card: "summary_large_image",
+    creator: "@codesbyshivam",
+    title: "Building Tiltbot | Shivam Taneja",
+    description:
+      "How I built Tiltbot, an AI gaming roast generator.",
+    images: ["/og/blog/building-tiltbot"],
+  },
+  alternates: {
+    canonical: "https://www.shivamtaneja.com/blog/building-tiltbot",
+  },
+  robots: "index, follow",
+};
+
+<Wrapper>
+  <article className="flex flex-col gap-6">
+
+    # Building Tiltbot
+
+    <div className="text-sm dark:text-neutral-500 text-neutral-500">
+      November 26, 2026
+    </div>
+
+    Tiltbot is Tilt-Bot, an AI-powered gaming roast generator I built. It
+    creates witty, non-toxic comebacks for gamers, so competitive banter stays
+    fun without turning mean in chat.
+
+    - [Try Tiltbot](https://tilt-bot.shivamtaneja.com/)
+    - [Project page](https://www.shivamtaneja.com/projects/tilt-bot)
+
+    <SubSection title="Why I built Tiltbot">
+      The inspiration came from observing gaming communities where trash talk
+      is common, and where it can often cross into toxicity. I wanted a tool
+      that preserves the fun of competitive banter while filtering out
+      genuinely harmful content. The aim is a positive gaming environment that
+      still keeps the competitive spirit, and a way to use AI for healthier
+      online interactions in gaming spaces.
+
+      If you searched for Tiltbot or Tilt-Bot and landed here, this is that
+      project.
+    </SubSection>
+
+    <SubSection title="What you can do">
+      - Choose a game, a context, and a tone preference
+      - Get clever, game-specific comebacks tailored to different gaming contexts
+      - Pick from different styles of humor
+      - Keep every roast playful with a non-toxic filter, so it is not harmful or offensive
+      - Use game selection for popular competitive games
+      - Save favorite roasts with a user account and personalize the experience
+      - Share a roast with friends and fellow gamers
+      - Use it on desktop and on mobile
+
+      You choose the game, the context, and the tone. Groq AI generates the
+      roasts, filtering keeps them playful and non-toxic, and you get multiple
+      options to copy or share.
+    </SubSection>
+
+    <SubSection title="How Tiltbot is built">
+      The project page splits the stack into a front end and a back end.
+
+      Front end:
+      - Next.js 15
+      - React 19
+      - TypeScript
+      - Tailwind CSS
+      - Radix UI
+      - React Query
+      - React Hook Form
+      - Zod
+      - Zustand
+      - Axios
+      - Crypto
+      - React Toastify
+      - Lucide React
+      - date-fns
+
+      Back end:
+      - NestJS 11
+      - Prisma 6
+      - Passport.js
+      - JWT
+      - Groq SDK
+      - Resend
+      - Class Validator
+      - Cookie Parser
+      - RxJS
+    </SubSection>
+
+    <SubSection title="What I learned">
+      Tone was the hard balance: funny and edgy, without crossing into
+      genuinely offensive territory. The system also has to understand context
+      and terminology from different games, and the filters have to keep
+      generated content within community standards. The AI generation still
+      needs a quick response.
+
+      The project page also lists future improvements: voice output through
+      text-to-speech, more games and contexts, custom training so you can
+      influence the roast style, API access for streaming tools and other
+      gaming platforms, and community features such as voting and collections
+      of favorite roasts.
+    </SubSection>
+
+    <SubSection title="Try Tiltbot">
+      The live app is at
+      [tilt-bot.shivamtaneja.com](https://tilt-bot.shivamtaneja.com/).
+      For a shorter summary, see the
+      [Tilt-Bot project page](https://www.shivamtaneja.com/projects/tilt-bot).
+
+      Built by Shivam Taneja.
+    </SubSection>
+
+  </article>
+</Wrapper>
