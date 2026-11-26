@@ -1,9 +1,13 @@
 import { createHash } from "crypto";
 import { NextRequest, NextResponse } from "next/server";
-import * as cheerio from "cheerio";
 import { parseStringPromise } from "xml2js";
 
-import { MEM0_USER_ID, memoryClient } from "@/lib/chat";
+import {
+  extractPageContent,
+  MEM0_USER_ID,
+  memoryClient,
+  shouldSkipIngestUrl,
+} from "@/lib/chat";
 import {
   clearAllCrawlingMeta,
   deleteCrawlingMetaByUrl,
@@ -57,7 +61,7 @@ async function ingestPage(
     [
       {
         role: "user",
-        content: `Here is information about Shivam Taneja from the page ${url}: \n\n${text}`,
+        content: `Here is information about Shivam Taneja from the page ${url}:\n\n${text}`,
       },
     ],
     {
@@ -73,6 +77,7 @@ async function ingestPage(
 }
 
 export async function GET(req: NextRequest) {
+  // Dev-only: 404 in production (Vercel NODE_ENV=production)
   if (serverEnv().NODE_ENV !== "development") {
     return new NextResponse("Not Found", { status: 404 });
   }
@@ -92,7 +97,7 @@ export async function GET(req: NextRequest) {
       });
     }
 
-    console.log("Starting sitemap fetch from localhost:3000...");
+    console.log("Starting sitemap sync into Mem0...");
 
     const sitemapRes = await fetch(`${LOCAL_ORIGIN}/sitemap.xml`);
     if (!sitemapRes.ok) {
@@ -101,7 +106,6 @@ export async function GET(req: NextRequest) {
 
     const xml = await sitemapRes.text();
     const result = await parseStringPromise(xml);
-
     const urls: string[] = result.urlset.url.map(
       (u: { loc: string[] }) => u.loc[0],
     );
@@ -123,6 +127,13 @@ export async function GET(req: NextRequest) {
 
     for (const url of urls) {
       seenUrls.add(url);
+
+      if (shouldSkipIngestUrl(url)) {
+        console.log(`Skip path: ${url}`);
+        summary.skipped.push(url);
+        continue;
+      }
+
       const localUrl = url.replace(SITE_ORIGIN, LOCAL_ORIGIN);
       console.log(`Fetching ${localUrl}...`);
 
@@ -135,12 +146,7 @@ export async function GET(req: NextRequest) {
         }
 
         const html = await pageRes.text();
-        const $ = cheerio.load(html);
-
-        $("script, style, nav, footer, header, noscript, iframe").remove();
-
-        const mainContent = $("main").length ? $("main") : $("body");
-        const text = mainContent.text().replace(/\s+/g, " ").trim();
+        const text = extractPageContent(html);
 
         if (!text) {
           console.log(`No text content for ${url}, skipping.`);
@@ -157,31 +163,24 @@ export async function GET(req: NextRequest) {
           continue;
         }
 
+        if (previous) summary.updated.push(url);
+        else summary.added.push(url);
+
+        console.log(
+          `${previous ? "Updating" : "Adding"} ${url} (${text.substring(0, 50).replace(/\n/g, " ")}...)`,
+        );
+
         if (previous?.memoryIds?.length) {
-          console.log(
-            `Deleting ${previous.memoryIds.length} old memories for ${url}...`,
-          );
           await deleteMemories(previous.memoryIds);
         }
 
-        console.log(
-          `${previous ? "Updating" : "Adding"} ${url} (${text.substring(0, 50)}...)`,
-        );
-
         const { memoryIds } = await ingestPage(url, text);
-
         await upsertCrawlingMeta({
           url,
           contentHash,
           memoryIds,
           lastIngestedAt: new Date(),
         });
-
-        if (previous) {
-          summary.updated.push(url);
-        } else {
-          summary.added.push(url);
-        }
       } catch (err) {
         console.error(`Error processing ${localUrl}:`, err);
         summary.failed.push(url);
@@ -189,14 +188,17 @@ export async function GET(req: NextRequest) {
     }
 
     for (const meta of existingMeta) {
-      if (seenUrls.has(meta.url)) continue;
+      const goneFromSitemap = !seenUrls.has(meta.url);
+      const nowSkipped = shouldSkipIngestUrl(meta.url);
+      if (!goneFromSitemap && !nowSkipped) continue;
 
-      console.log(`Removing stale page from Mem0: ${meta.url}`);
+      summary.removed.push(meta.url);
+      console.log(`Removing from Mem0: ${meta.url}`);
+
       if (meta.memoryIds?.length) {
         await deleteMemories(meta.memoryIds);
       }
       await deleteCrawlingMetaByUrl(meta.url);
-      summary.removed.push(meta.url);
     }
 
     return NextResponse.json({

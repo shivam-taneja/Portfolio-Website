@@ -118,7 +118,7 @@ For detailed information on the dashboard functionality, please see the [Dashboa
 
 ## 🤖 Content Crawler
 
-Dev-only sync: with the site running locally, hit `/api/chat/ingest` to ingest/sync. Use `?reset=1` only to wipe Mem0 + `crawling_meta` (no ingest).
+Dev-only (`NODE_ENV=development`): `/api/chat/ingest` syncs cleaned page text into Mem0 (hash-based add/update/remove). `?reset=1` wipes only. `/stats` and `/socials` are skipped. 404 on production.
 
 Details: [Chatbot Documentation](./docs/chatbot.md#content-ingest-mem0-sync).
 

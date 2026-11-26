@@ -136,13 +136,13 @@ Wipe only (no ingest):
 curl "http://localhost:3000/api/chat/ingest?reset=1"
 ```
 
-Ingest / incremental sync (separate step):
+Sync (writes Mem0 + `crawling_meta`):
 
 ```bash
 curl "http://localhost:3000/api/chat/ingest"
 ```
 
-`?reset=1` only wipes Mem0 for `shivam_portfolio` and clears `crawling_meta`. It does **not** re-ingest. Call ingest without `reset` when you want to add content.
+Returns 404 outside development (`NODE_ENV !== "development"`), so it is unavailable on Vercel production. `?reset=1` only wipes Mem0 for `shivam_portfolio` and clears `crawling_meta`. `/stats` and `/socials` are skipped (stale metrics).
 
 ## Optimization Techniques
 
