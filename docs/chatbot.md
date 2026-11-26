@@ -142,6 +142,12 @@ Sync (writes Mem0 + `crawling_meta`):
 curl "http://localhost:3000/api/chat/ingest"
 ```
 
+Hash check only (no Mem0 / meta writes — see what would add/update/skip/remove):
+
+```bash
+curl "http://localhost:3000/api/chat/ingest/check"
+```
+
 Returns 404 outside development (`NODE_ENV !== "development"`), so it is unavailable on Vercel production. `?reset=1` only wipes Mem0 for `shivam_portfolio` and clears `crawling_meta`. `/stats` and `/socials` are skipped (stale metrics).
 
 ## Optimization Techniques
