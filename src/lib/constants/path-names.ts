@@ -10,6 +10,7 @@ export const pathNames = {
     "/blog": "Writing",
   },
   blog: {
+    "building-tiltbot": "Blog | Building Tiltbot",
     "building-bhondu-game": "Blog | Building Bhondu Game",
     "building-chat-mingle": "Blog | Building Chat Mingle",
   },
