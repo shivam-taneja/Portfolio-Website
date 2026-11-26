@@ -26,7 +26,7 @@ const MentorshipSection = () => {
         </div>
 
         <ul className="flex flex-col gap-4">
-          {mentorships
+          {[...mentorships]
             .reverse()
             .slice(0, 3)
             .map((item, idx) => (

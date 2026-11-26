@@ -82,7 +82,7 @@ export function extractPageContent(html: string): string {
   const $ = cheerio.load(html);
 
   $(
-    "script, style, noscript, iframe, svg, form, [aria-hidden='true']",
+    "script, style, noscript, iframe, svg, form, [aria-hidden='true'], [role='tooltip'], [data-radix-popper-content-wrapper]",
   ).remove();
 
   const root = $("main").length ? $("main").first() : $("body");
